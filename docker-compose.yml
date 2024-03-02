@@ -1,0 +1,17 @@
+# version: "3"
+# services:
+#   # Service名は、flask
+#   backend-app:
+#     # DockerfileまでのPath
+#     build: .
+#     # ports => HostPort: CotainerPort の形で、Portを公開している。
+#     ports:
+#       - "5001:5000"
+#     # コンテナに名前をつける
+#     container_name: flask_api
+#     # Hostマシンの ./app を Container の /usr/src/app にマウントしています。
+#     volumes:
+#       - ./app:/usr/src/app
+#     # Flaskを実行する
+#     command: flask run --host=0.0.0.0
+
