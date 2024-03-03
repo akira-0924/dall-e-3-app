@@ -14,7 +14,7 @@ def generateImage(text):
 
     print("---------------")
     images = []
-    client = OpenAI(api_key='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')
+    client = OpenAI(api_key='sk-xxx')
     response = client.images.generate(
         model="dall-e-3",
         prompt=text,
