@@ -1,2 +1,5 @@
 Flask==2.3.3
 flask_cors
+load_dotenv
+numpy
+requests

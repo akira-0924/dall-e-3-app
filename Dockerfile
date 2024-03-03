@@ -21,6 +21,8 @@ RUN apt-get update && apt-get install -y \
 RUN pip install --upgrade pip
 RUN pip install openai
 RUN pip install boto3
+RUN pip install Pillow
+RUN pip install scikit-image
 RUN pip install pip install --no-cache-dir -r requirements.txt
 
 # パッケージをキャッシュせずにインストール & -rオプションで、依存パッケージを一括インストール
