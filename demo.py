@@ -243,11 +243,11 @@ for i in range(RANGE):
                 ssm_api_key =  response['Parameters'][0]['Value']
                 client = OpenAI(api_key=ssm_api_key)
 
-                response = client.images.generate(
-                    model="dall-e-3",
-                    prompt=prompt,
-                    size="1024x1024"
-                )
+                # response = client.images.generate(
+                #     model="dall-e-3",
+                #     prompt=prompt,
+                #     size="1024x1024"
+                # )
                 # 画像のURLを取得
                 image_url = response.data[0].url
 

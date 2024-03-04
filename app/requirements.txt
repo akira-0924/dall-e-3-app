@@ -3,3 +3,5 @@ flask_cors
 load_dotenv
 numpy
 requests
+Pillow
+romkan

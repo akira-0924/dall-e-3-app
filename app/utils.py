@@ -9,12 +9,25 @@ import re
 import requests
 from skimage.metrics import structural_similarity as compare_ssim
 import numpy as np
+import pykakasi
+from dotenv import load_dotenv
 
-def generateImage(text):
+def generateImage(text, base_image):
+    load_dotenv()
+    os.makedirs('../ai-front/public/generated_images', exist_ok=True)
 
-    print("---------------")
     images = []
-    client = OpenAI(api_key='sk-xxx')
+    s3_client = boto3.client('s3')
+    s3_object = s3_client.get_object(
+    Bucket='image-20240304', Key='theme1.png')
+    image_data = BytesIO(s3_object['Body'].read())
+    Image.open(image_data)
+    groundtruth_img = Image.open(image_data)
+    groundtruth_img = groundtruth_img.convert('L')
+    groundtruth_img = groundtruth_img.resize((150, 150))
+    print("aaaa")
+
+    client = OpenAI(api_key=os.getenv('OPEN_AI_API_KEY'))
     response = client.images.generate(
         model="dall-e-3",
         prompt=text,
@@ -24,43 +37,29 @@ def generateImage(text):
         # 画像のURLを取得
         image_url = response.data[0].url
         image_response = requests.get(image_url)
-        print("---------image request.get--------")
-        print(image_response)
         if image_response.status_code == 200:
-            print('----------status200-----------')
-            file_name = re.sub(r'\W+', '_', text)[:20] + '.png'
-            print("---------image open--------")
-            generated_img = Image.open(BytesIO(image_response.content))
+            kks = pykakasi.kakasi()
+            text_list = [text]
+            result = kks.convert(text_list[0])
+            print(result)
+            file_name = re.sub(r'\W+', '_', result[0]['hepburn'])[:10] + '.png'
+            path = os.path.join('../ai-front/public/generated_images', file_name)
+            with open(path, "wb") as f:
+                f.write(image_response.content)
             img = Image.open(BytesIO(image_response.content))
 
-            # 画像をリサイズ
-            print("---------image resize--------")
             img = img.resize((150, 150))
-
-            print("---------image gray--------")
-            # 画像をグレースケールに変換
             img = img.convert('L')
 
-            print("---------file path--------")
-            # 保存パスの設定
-            file_path = os.path.join('generated_images', file_name)
-            print("---------image save--------")
-            # img.save(file_path)
-
             # SSIMの計算
-            # ssim = compare_ssim(np.array(groundtruth_img), np.array(img))
-            ssim = 0.1 #
+            ssim = compare_ssim(np.array(groundtruth_img), np.array(img))
 
-            print("-------------response data-----------")
-            # レスポンスの作成
             response_data = {
                 'image': image_url,
                 'ssim': ssim
             }
-            print(response_data)
             return jsonify(response_data)
         else:
-            print('--------------err-------------')
             return jsonify({'error': 'Failed to download image'}), 500
 
     except Exception as e:

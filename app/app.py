@@ -36,9 +36,8 @@ def parse():
     try:
         data = request.get_json()
         text = data['post_text']
-        response = generateImage(text)
-        print("--------res-------")
-        print(response)
+        base_image = data['base_image']
+        response = generateImage(text, base_image)
         return response
     except Exception as e:
         error_message = str(e)
