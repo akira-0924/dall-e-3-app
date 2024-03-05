@@ -9,7 +9,13 @@ interface Props {
   setText: (e: any) => void;
 }
 
-const CreateCard = ({ title, src, disabled, questionNum, setText }: Props) => {
+export const CreateCard = ({
+  title,
+  src,
+  disabled,
+  questionNum,
+  setText,
+}: Props) => {
   return (
     <div className="sm:w-1/2 mb-10 px-4">
       <div className="text-white text-4xl font-extrabold pb-4 text-left">
@@ -32,5 +38,3 @@ const CreateCard = ({ title, src, disabled, questionNum, setText }: Props) => {
     </div>
   );
 };
-
-export default CreateCard;

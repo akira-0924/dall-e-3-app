@@ -1,6 +1,6 @@
 import React, { ReactNode } from "react";
 
-const FeatureLayout = ({ children }: { children: ReactNode }) => {
+export const FeatureLayout = ({ children }: { children: ReactNode }) => {
   return (
     <section className="text-gray-600 body-font font-semibold">
       <div className="container px-5 py-24 mx-auto">
@@ -11,5 +11,3 @@ const FeatureLayout = ({ children }: { children: ReactNode }) => {
     </section>
   );
 };
-
-export default FeatureLayout;

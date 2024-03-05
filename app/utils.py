@@ -11,6 +11,8 @@ from skimage.metrics import structural_similarity as compare_ssim
 import numpy as np
 import pykakasi
 from dotenv import load_dotenv
+import random
+import string
 
 def generateImage(text, base_image):
     load_dotenv()
@@ -25,7 +27,6 @@ def generateImage(text, base_image):
     groundtruth_img = Image.open(image_data)
     groundtruth_img = groundtruth_img.convert('L')
     groundtruth_img = groundtruth_img.resize((150, 150))
-    print("aaaa")
 
     client = OpenAI(api_key=os.getenv('OPEN_AI_API_KEY'))
     response = client.images.generate(
@@ -41,9 +42,8 @@ def generateImage(text, base_image):
             kks = pykakasi.kakasi()
             text_list = [text]
             result = kks.convert(text_list[0])
-            print(result)
-            file_name = re.sub(r'\W+', '_', result[0]['hepburn'])[:10] + '.png'
-            path = os.path.join('../ai-front/public/generated_images', file_name)
+            file_name = ''.join(random.choices(string.ascii_uppercase, k=5))
+            path = os.path.join('../ai-front/public/generated_images', file_name + '.png')
             with open(path, "wb") as f:
                 f.write(image_response.content)
             img = Image.open(BytesIO(image_response.content))
@@ -56,7 +56,8 @@ def generateImage(text, base_image):
 
             response_data = {
                 'image': image_url,
-                'ssim': ssim
+                'ssim': ssim,
+                'prompt': text
             }
             return jsonify(response_data)
         else:

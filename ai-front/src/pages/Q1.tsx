@@ -1,25 +1,20 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import FeatureLayout from "../components/FeatureLayout";
-import CreateCard from "../components/CreateCard";
-
-interface ImageDta {
-  image: string;
-  ssim: number;
-}
+import { PageProps, ImageData } from "./type";
+import { headers } from "../utils/utils";
+import {
+  FeatureLayout,
+  CreateCard,
+  GeneratedImage,
+  List,
+} from "../components/index";
+import { Image } from "../components/atoms/Image";
 
 const url = "http://127.0.0.1:5000/api";
-const headers = {
-  "Content-type": "application/json",
-  Accept: "application/json",
-};
 
-const Q1 = () => {
+const Q1 = ({ num }: PageProps) => {
   const [text, setText] = useState("");
-  const [data, setData] = useState<ImageDta>({
-    image: "",
-    ssim: 0,
-  });
+  const [data, setData] = useState<ImageData[]>([]);
 
   const ChangePropmt = (e: any) => {
     setText(e.target.value);
@@ -30,20 +25,33 @@ const Q1 = () => {
     fetchData();
   };
 
+  // const [test, setTest] = useState<any>([]);
+  // const testData = {
+  //   name: "aa",
+  //   age: 1,
+  // };
+  // const testClick = () => {
+  //   setTest([...test, testData]);
+  // };
+  // console.log(test);
+
   const fetchData = async () => {
     try {
-      const data = {
+      const postData = {
         post_text: text,
-        base_image: `${process.env.REACT_APP_S3_ENDPOINT}/theme1.png`,
+        base_image: `${process.env.REACT_APP_S3_ENDPOINT}/theme${num}.png`,
       };
       await axios
-        .post(`${url}/generateImage`, data, {
+        .post(`${url}/generateImage`, postData, {
           headers,
           timeout: 600000,
         })
         .then((response) => {
           console.log(response.data);
-          setData(response.data);
+          setData([response.data, ...data]);
+        })
+        .then(() => {
+          console.log(data.length);
         })
         .catch((error) => console.error(error));
     } catch (error) {
@@ -51,14 +59,8 @@ const Q1 = () => {
     }
   };
 
-  console.log(text);
-
   return (
     <div className="App">
-      <h1 className="text-white text-4xl font-extrabold pt-12">
-        MAD-Day用画像生成アプリ
-      </h1>
-
       <form onSubmit={handleSubmit}>
         <FeatureLayout>
           <CreateCard
@@ -75,18 +77,21 @@ const Q1 = () => {
               生成画像
             </div>
             <div className="rounded-lg h-84 overflow-hidden">
-              <img
-                alt="content"
-                height={500}
-                className="object-cover object-center h-full w-full"
-                src="/generated_images/dora.png"
-              />
+              {data?.length > 0 && data[0].image ? (
+                <GeneratedImage image_url={data[0].image} />
+              ) : (
+                <Image image_url="/generated_images/HTML.png" />
+              )}
             </div>
             <div className="">類似度</div>
-            <div className="">{data.ssim}</div>
+            <div className="">{data?.length > 0 && data[0].ssim}</div>
           </div>
         </FeatureLayout>
       </form>
+      <List generateList={data} />
+      {/* <button onClick={testClick} style={{ color: "white" }}>
+        aaaa
+      </button> */}
     </div>
   );
 };
