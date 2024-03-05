@@ -1,6 +1,4 @@
-import React, { useEffect, useState } from "react";
 import "./App.css";
-import axios from "axios";
 import Q1 from "./pages/Q1";
 import Q2 from "./pages/Q2";
 import Q3 from "./pages/Q3";

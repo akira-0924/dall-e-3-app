@@ -7,7 +7,6 @@ interface Props {
 }
 
 export const List = ({ generateList }: Props) => {
-  console.log(generateList.length);
   return (
     <section className="text-gray-600 body-font">
       <div className="container px-5 py-24 mx-auto">

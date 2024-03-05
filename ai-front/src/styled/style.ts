@@ -6,8 +6,8 @@ export const LoadingOverlay = styled.div`
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.8); /* 半透明の黒 */
-  z-index: 1000; /* オーバーレイの重なり順 */
+  background-color: rgba(0, 0, 0, 0.8);
+  z-index: 1000;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -35,4 +35,25 @@ export const LoadingText = styled.div`
   color: #ffffff;
   font-size: 20px;
   margin-left: 10px;
+`;
+
+export const WordContainer = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+`;
+
+export const WordChip = styled.span`
+  min-width: 60px;
+  padding: 4px;
+  text-align: center;
+  background-color: #ffffff;
+  display: inline-block;
+  margin: 4px;
+  border-radius: 20px;
+  cursor: pointer;
+  border: 1px solid #808080;
+  &:hover {
+    background-color: #dddddd;
+  }
 `;

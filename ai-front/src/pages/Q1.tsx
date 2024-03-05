@@ -8,12 +8,18 @@ import {
   GeneratedImage,
   List,
   Loading,
+  WordList,
 } from "../components/index";
 import { Image } from "../components/atoms/Image";
+import { WORDLIST } from "../data/word";
+import { WordContainer } from "../styled/style";
 
 const url = "http://127.0.0.1:5000/api";
 
 const Q1 = ({ num }: PageProps) => {
+  const test = JSON.stringify(WORDLIST);
+  const tes1 = JSON.parse(test);
+
   const [text, setText] = useState("");
   const [data, setData] = useState<ImageData[]>([]);
   const [isLoading, setIsLoading] = useState(false);
@@ -43,9 +49,6 @@ const Q1 = ({ num }: PageProps) => {
         .then((response) => {
           console.log(response.data);
           setData([response.data, ...data]);
-        })
-        .then(() => {
-          console.log(data.length);
         })
         .catch((error) => console.error(error));
     } catch (error) {
@@ -82,6 +85,9 @@ const Q1 = ({ num }: PageProps) => {
               <div className="">類似度</div>
               <div className="">{data?.length > 0 && data[0].ssim}</div>
             </div>
+            {/* <WordContainer> */}
+            <WordList list={WORDLIST} team="A" />
+            {/* </WordContainer> */}
           </FeatureLayout>
         </form>
         <List generateList={data} />
