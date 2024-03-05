@@ -7,6 +7,7 @@ import {
   CreateCard,
   GeneratedImage,
   List,
+  Loading,
 } from "../components/index";
 import { Image } from "../components/atoms/Image";
 
@@ -15,25 +16,18 @@ const url = "http://127.0.0.1:5000/api";
 const Q1 = ({ num }: PageProps) => {
   const [text, setText] = useState("");
   const [data, setData] = useState<ImageData[]>([]);
+  const [isLoading, setIsLoading] = useState(false);
 
   const ChangePropmt = (e: any) => {
     setText(e.target.value);
   };
 
-  const handleSubmit = (event: any) => {
+  const handleSubmit = async (event: any) => {
     event.preventDefault();
-    fetchData();
+    setIsLoading(true);
+    await fetchData();
+    setIsLoading(false);
   };
-
-  // const [test, setTest] = useState<any>([]);
-  // const testData = {
-  //   name: "aa",
-  //   age: 1,
-  // };
-  // const testClick = () => {
-  //   setTest([...test, testData]);
-  // };
-  // console.log(test);
 
   const fetchData = async () => {
     try {
@@ -60,39 +54,39 @@ const Q1 = ({ num }: PageProps) => {
   };
 
   return (
-    <div className="App">
-      <form onSubmit={handleSubmit}>
-        <FeatureLayout>
-          <CreateCard
-            title="お題"
-            src=""
-            questionNum={1}
-            disabled={false}
-            setText={(e) => {
-              ChangePropmt(e);
-            }}
-          />
-          <div className="sm:w-1/2 mb-10 px-4 text-white">
-            <div className="text-white text-4xl font-extrabold pb-4 text-left">
-              生成画像
+    <>
+      {isLoading && <Loading />}
+      <div className="App">
+        <form onSubmit={handleSubmit}>
+          <FeatureLayout>
+            <CreateCard
+              title="お題"
+              src=""
+              questionNum={1}
+              disabled={false}
+              setText={(e) => {
+                ChangePropmt(e);
+              }}
+            />
+            <div className="sm:w-1/2 mb-10 px-4 text-white">
+              <div className="text-white text-4xl font-extrabold pb-4 text-left">
+                生成画像
+              </div>
+              <div className="rounded-lg h-84 overflow-hidden">
+                {data?.length > 0 && data[0].image ? (
+                  <GeneratedImage image_url={data[0].image} />
+                ) : (
+                  <Image image_url="/generated_images/HTML.png" />
+                )}
+              </div>
+              <div className="">類似度</div>
+              <div className="">{data?.length > 0 && data[0].ssim}</div>
             </div>
-            <div className="rounded-lg h-84 overflow-hidden">
-              {data?.length > 0 && data[0].image ? (
-                <GeneratedImage image_url={data[0].image} />
-              ) : (
-                <Image image_url="/generated_images/HTML.png" />
-              )}
-            </div>
-            <div className="">類似度</div>
-            <div className="">{data?.length > 0 && data[0].ssim}</div>
-          </div>
-        </FeatureLayout>
-      </form>
-      <List generateList={data} />
-      {/* <button onClick={testClick} style={{ color: "white" }}>
-        aaaa
-      </button> */}
-    </div>
+          </FeatureLayout>
+        </form>
+        <List generateList={data} />
+      </div>
+    </>
   );
 };
 
