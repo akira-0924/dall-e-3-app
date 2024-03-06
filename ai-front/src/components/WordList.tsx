@@ -9,7 +9,11 @@ interface Props {
   addSelectWordList: (word: string) => void;
 }
 
-export const WordList = ({ list, team, addSelectWordList }: Props) => {
+export const WordList = ({
+  list,
+  team,
+  addSelectWordList,
+}: Props): JSX.Element => {
   let displayList;
   if (team === "A") {
     displayList = list.A;

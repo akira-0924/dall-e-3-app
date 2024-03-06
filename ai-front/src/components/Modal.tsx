@@ -1,31 +1,37 @@
 import {
   ModalContainer,
   ModalWindow,
-  ModalTitle,
-  CloseButton,
   ModalContent,
   ButtonContainer,
   Button,
   Select,
+  ErrContainer,
 } from "../styled/style";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 interface Props {
   onClose: () => void;
-  onApply: (team: string) => void;
+  onApply: (team: string) => string | undefined;
 }
 
 export const Modal = ({ onClose, onApply }: Props) => {
   const [selectedTeam, setSelectedTeam] = useState("");
+  const [isErr, setIsErr] = useState(false);
 
   const handleTeamChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    setIsErr(false);
     setSelectedTeam(event.target.value);
   };
+  useEffect(() => {
+    document.body.style.overflow = "hidden";
+
+    return () => {
+      document.body.style.overflow = "visible";
+    };
+  }, []);
   return (
     <ModalContainer>
       <ModalWindow>
-        {/* <ModalTitle>Modal title</ModalTitle> */}
-        {/* <CloseButton onClick={onClose}>×</CloseButton> */}
         <ModalContent>チームを選択してください</ModalContent>
         <Select value={selectedTeam} onChange={handleTeamChange}>
           <option value="" disabled>
@@ -35,11 +41,21 @@ export const Modal = ({ onClose, onApply }: Props) => {
           <option value="B">B</option>
           <option value="C">C</option>
         </Select>
+        {isErr && (
+          <ErrContainer className="text-red-500">
+            チームを選択してください
+          </ErrContainer>
+        )}
         <ButtonContainer>
           <Button
             className="nextButton"
             onClick={() => {
-              onApply(selectedTeam);
+              const result = onApply(selectedTeam);
+              if (result !== undefined || result !== "") {
+                setIsErr(true);
+              } else {
+                setIsErr(false);
+              }
             }}
           >
             決定

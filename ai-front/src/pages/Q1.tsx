@@ -13,22 +13,20 @@ import {
   Sum,
 } from "../components/index";
 import { Image } from "../components/atoms/Image";
-import { WORDLIST } from "../data/word";
+// import { WORDLIST } from "../data/word";
 import { useModal } from "../hooks/useModal";
+import { useGetS3Object } from "../hooks/useGetS3Object";
 
 const url = "http://127.0.0.1:5000/api";
 
 const Q1 = ({ num }: PageProps) => {
-  //json
-  const test = JSON.stringify(WORDLIST);
-  const tes1 = JSON.parse(test);
-
   const [text, setText] = useState("");
   const [data, setData] = useState<ImageData[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [selectedWordList, setSelectedWordList] = useState<string[]>([]);
 
   const { isOpen, onClose, onApply, selectedTeam } = useModal();
+  const { s3Data } = useGetS3Object();
 
   const ChangePropmt = (prompt: string) => setText(prompt);
 
@@ -104,14 +102,14 @@ const Q1 = ({ num }: PageProps) => {
               <div className="">{data?.length > 0 ? data[0].ssim : "0"}</div>
             </div>
             <WordList
-              list={WORDLIST}
+              list={s3Data}
               team={selectedTeam}
               addSelectWordList={addSelectWordList}
             />
           </FeatureLayout>
         </form>
-        <Sum data={data} />
         <List generateList={data} />
+        <Sum data={data} />
       </div>
     </>
   );

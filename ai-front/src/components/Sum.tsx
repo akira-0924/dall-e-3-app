@@ -16,5 +16,5 @@ export const Sum = ({ data }: Porps) => {
     setSum(ssim_sum);
   }, [data]);
 
-  return <h1 className="text-white">合計点：{sum}</h1>;
+  return <h1 className="text-white text-3xl font-bold">合計点：{sum}</h1>;
 };

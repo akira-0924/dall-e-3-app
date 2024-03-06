@@ -105,8 +105,8 @@ export const ModalContent = styled.p`
 
 // ボタンコンテナ
 export const ButtonContainer = styled.div`
-  display: flex;
   justify-content: space-between;
+  margin-top: 12px;
 `;
 
 // ボタン
@@ -132,4 +132,12 @@ export const Button = styled.button`
 export const Select = styled.select`
   padding: 10px;
   font-size: 16px;
+  border: 1px solid #4b5563;
+  border-radius: 4px;
+`;
+
+export const ErrContainer = styled.div`
+  width: 100%;
+  height: 24px;
+  margin: 6px 0;
 `;

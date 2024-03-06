@@ -13,8 +13,14 @@ export const useModal = () => {
   }, [setIsOpen]);
 
   const onApply = (team: string) => {
-    setIsOpen(false);
-    setSelectedTeam(team);
+    console.log(team);
+    if (team === "") {
+      console.log("called");
+      return "チームを選択してください";
+    } else {
+      setIsOpen(false);
+      setSelectedTeam(team);
+    }
   };
 
   return { isOpen, onOpen, onClose, onApply, selectedTeam };
