@@ -24,19 +24,28 @@ const Q1 = ({ num }: PageProps) => {
   const [text, setText] = useState("");
   const [data, setData] = useState<ImageData[]>([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [selectedWordList, setSelectedWordList] = useState<string[]>([]);
 
-  const { isOpen, onClose, onOpen, onApply, selectedTeam } = useModal();
+  const { isOpen, onClose, onApply, selectedTeam } = useModal();
 
-  console.log(selectedTeam);
-  const ChangePropmt = (e: any) => {
-    setText(e.target.value);
-  };
+  const ChangePropmt = (prompt: string) => setText(prompt);
 
   const handleSubmit = async (event: any) => {
     event.preventDefault();
     setIsLoading(true);
     await fetchData();
     setIsLoading(false);
+  };
+
+  const handleClick = (type: string, e: any) => {
+    if (type === "button") {
+      setSelectedWordList([]);
+      return;
+    }
+    handleSubmit(e);
+  };
+  const addSelectWordList = (word: string) => {
+    setSelectedWordList([...selectedWordList, word]);
   };
 
   const fetchData = async () => {
@@ -65,15 +74,17 @@ const Q1 = ({ num }: PageProps) => {
       {isLoading && <Loading />}
       <div className="App">
         {isOpen && <Modal onClose={onClose} onApply={onApply} />}
-        <form onSubmit={handleSubmit}>
+        <form>
           <FeatureLayout>
             <CreateCard
               title="お題"
               src=""
               questionNum={1}
+              selectedWordList={selectedWordList}
               disabled={false}
-              setText={(e) => {
-                ChangePropmt(e);
+              handleClick={handleClick}
+              setText={(prompt) => {
+                ChangePropmt(prompt);
               }}
             />
             <div className="sm:w-1/2 mb-10 px-4 text-white">
@@ -88,9 +99,13 @@ const Q1 = ({ num }: PageProps) => {
                 )}
               </div>
               <div className="">類似度</div>
-              <div className="">{data?.length > 0 && data[0].ssim}</div>
+              <div className="">{data?.length > 0 ? data[0].ssim : "0"}</div>
             </div>
-            <WordList list={WORDLIST} team={selectedTeam} />
+            <WordList
+              list={WORDLIST}
+              team={selectedTeam}
+              addSelectWordList={addSelectWordList}
+            />
           </FeatureLayout>
         </form>
         <List generateList={data} />

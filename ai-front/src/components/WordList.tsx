@@ -6,9 +6,10 @@ import { SizeBox } from "./atoms/SizeBox";
 interface Props {
   list: Word;
   team: string;
+  addSelectWordList: (word: string) => void;
 }
 
-export const WordList = ({ list, team }: Props) => {
+export const WordList = ({ list, team, addSelectWordList }: Props) => {
   let displayList;
   if (team === "A") {
     displayList = list.A;
@@ -17,21 +18,26 @@ export const WordList = ({ list, team }: Props) => {
   } else if (team === "C") {
     displayList = list.C;
   }
-  console.log(displayList);
   return (
     <>
       <WordContainer>
         {displayList?.noun.map((item, index) => {
-          return <WordChip key={index}>{item.word}</WordChip>;
+          return (
+            <WordChip onClick={() => addSelectWordList(item.word)} key={index}>
+              {item.word}
+            </WordChip>
+          );
         })}
       </WordContainer>
       <SizeBox size={32} />
       <WordContainer>
-        <div>
-          {displayList?.conjunction.map((item, index) => {
-            return <WordChip key={index}>{item}</WordChip>;
-          })}
-        </div>
+        {displayList?.conjunction.map((item, index) => {
+          return (
+            <WordChip onClick={() => addSelectWordList(item)} key={index}>
+              {item}
+            </WordChip>
+          );
+        })}
       </WordContainer>
     </>
   );

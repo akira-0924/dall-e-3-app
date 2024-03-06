@@ -18,8 +18,8 @@ const Q3 = ({ num }: PageProps) => {
   const [data, setData] = useState<ImageData[]>([]);
   const [isLoading, setIsLoading] = useState(false);
 
-  const ChangePropmt = (e: any) => {
-    setText(e.target.value);
+  const ChangePropmt = (prompt: string) => {
+    setText(prompt);
   };
 
   const handleSubmit = async (event: any) => {
@@ -28,6 +28,8 @@ const Q3 = ({ num }: PageProps) => {
     await fetchData();
     setIsLoading(false);
   };
+
+  const handleClick = () => {};
 
   const fetchData = async () => {
     try {
@@ -50,8 +52,6 @@ const Q3 = ({ num }: PageProps) => {
     }
   };
 
-  console.log(text);
-
   return (
     <>
       {isLoading && <Loading />}
@@ -61,10 +61,12 @@ const Q3 = ({ num }: PageProps) => {
             <CreateCard
               title="お題"
               src=""
+              selectedWordList={[]}
               questionNum={1}
               disabled={false}
-              setText={(e) => {
-                ChangePropmt(e);
+              handleClick={handleClick}
+              setText={(prompt) => {
+                ChangePropmt(prompt);
               }}
             />
             <div className="sm:w-1/2 mb-10 px-4 text-white">

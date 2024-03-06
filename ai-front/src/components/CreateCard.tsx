@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Button from "./atoms/Button";
+import { ButtonType } from "../pages/type";
 
 interface Props {
   title: string;
@@ -7,6 +8,8 @@ interface Props {
   questionNum: number;
   disabled: boolean;
   setText: (e: any) => void;
+  handleClick: (type: string, e: any) => void;
+  selectedWordList: string[];
 }
 
 export const CreateCard = ({
@@ -14,8 +17,15 @@ export const CreateCard = ({
   src,
   disabled,
   questionNum,
+  selectedWordList,
+  handleClick,
   setText,
 }: Props) => {
+  let textValue = selectedWordList.join("");
+
+  useEffect(() => {
+    setText(textValue);
+  }, [textValue]);
   return (
     <div className="sm:w-1/2 mb-10 px-4">
       <div className="text-white text-4xl font-extrabold pb-4 text-left">
@@ -32,9 +42,21 @@ export const CreateCard = ({
       <p className="mt-6 text-left text-white">プロンプト</p>
       <textarea
         className="w-full leading-relaxed text-base p-4 mt-4"
-        onChange={setText}
+        value={textValue}
+        readOnly
       ></textarea>
-      <Button />
+      <Button
+        text="生成する"
+        color="red"
+        type={ButtonType.Submit}
+        handleClick={handleClick}
+      />
+      <Button
+        text="プロンプトを削除する"
+        color="green"
+        type={ButtonType.Button}
+        handleClick={handleClick}
+      />
     </div>
   );
 };

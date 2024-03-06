@@ -17,3 +17,14 @@ export interface Word {
     conjunction: string[];
   };
 }
+
+export enum ButtonType {
+  Submit = "submit",
+  Button = "button",
+  Reset = "reset",
+}
+
+export interface ClickType {
+  e: any;
+  type: string;
+}
