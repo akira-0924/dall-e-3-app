@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { PageProps, ImageData } from "./type";
+import { PageProps, ImageData, WordItem, WordObj } from "./type";
 import { headers } from "../utils/utils";
 import {
   FeatureLayout,
@@ -8,19 +8,29 @@ import {
   GeneratedImage,
   List,
   Loading,
+  WordList,
+  Modal,
+  Sum,
 } from "../components/index";
 import { Image } from "../components/atoms/Image";
+import { WORDLIST } from "../data/word";
+import { useModal } from "../hooks/useModal";
+import { useGetS3Object } from "../hooks/useGetS3Object";
 
 const url = "http://127.0.0.1:5000/api";
 
 const Q3 = ({ num }: PageProps) => {
   const [text, setText] = useState("");
   const [data, setData] = useState<ImageData[]>([]);
+  const [uploadCount, setUploadCount] = useState(0);
+  const [json, setJson] = useState<WordObj>(WORDLIST.A);
   const [isLoading, setIsLoading] = useState(false);
+  const [selectedWordList, setSelectedWordList] = useState<string[]>([]);
 
-  const ChangePropmt = (prompt: string) => {
-    setText(prompt);
-  };
+  const { isOpen, onClose, onApply, selectedTeam } = useModal();
+  const { s3Data } = useGetS3Object(3, selectedTeam);
+
+  const ChangePropmt = (prompt: string) => setText(prompt);
 
   const handleSubmit = async (event: any) => {
     event.preventDefault();
@@ -29,7 +39,16 @@ const Q3 = ({ num }: PageProps) => {
     setIsLoading(false);
   };
 
-  const handleClick = () => {};
+  const handleClick = (type: string, e: any) => {
+    if (type === "button") {
+      setSelectedWordList([]);
+      return;
+    }
+    handleSubmit(e);
+  };
+  const addSelectWordList = (item: WordItem) => {
+    // setSelectedWordList([...selectedWordList, word]);
+  };
 
   const fetchData = async () => {
     try {
@@ -56,13 +75,15 @@ const Q3 = ({ num }: PageProps) => {
     <>
       {isLoading && <Loading />}
       <div className="App">
-        <form onSubmit={handleSubmit}>
+        {isOpen && <Modal onClose={onClose} onApply={onApply} />}
+        <form>
           <FeatureLayout>
             <CreateCard
               title="お題"
               src=""
-              selectedWordList={[]}
-              questionNum={1}
+              uploadCount={uploadCount}
+              questionNum={3}
+              selectedWordList={selectedWordList}
               disabled={false}
               handleClick={handleClick}
               setText={(prompt) => {
@@ -81,11 +102,13 @@ const Q3 = ({ num }: PageProps) => {
                 )}
               </div>
               <div className="">類似度</div>
-              <div className="">{data?.length > 0 && data[0].ssim}</div>
+              <div className="">{data?.length > 0 ? data[0].ssim : "0"}</div>
             </div>
+            <WordList list={json} addSelectWordList={addSelectWordList} />
           </FeatureLayout>
         </form>
         <List generateList={data} />
+        <Sum data={data} />
       </div>
     </>
   );

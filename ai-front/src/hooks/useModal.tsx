@@ -2,7 +2,7 @@ import { useCallback, useState } from "react";
 
 export const useModal = () => {
   const [isOpen, setIsOpen] = useState(true);
-  const [selectedTeam, setSelectedTeam] = useState("");
+  const [selectedTeam, setSelectedTeam] = useState("A");
 
   const onOpen = useCallback(() => {
     setIsOpen(true);

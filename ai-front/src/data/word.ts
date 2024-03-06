@@ -235,24 +235,78 @@ export const WORDLIST = {
       },
     ],
     conjunction: [
-      "は",
-      "が",
-      "の",
-      "に",
-      "と",
-      "みたいな",
-      "とても",
-      "または",
-      "かつ",
-      "それぞれ",
-      "のような",
-      "で",
-      "ある",
-      "いる",
-      "、",
-      "。",
-      "！",
-      "？",
+      {
+        word: "は",
+        count: 0,
+      },
+      {
+        word: "が",
+        count: 0,
+      },
+      {
+        word: "の",
+        count: 0,
+      },
+      {
+        word: "に",
+        count: 0,
+      },
+      {
+        word: "と",
+        count: 0,
+      },
+      {
+        word: "みたいな",
+        count: 0,
+      },
+      {
+        word: "とても",
+        count: 0,
+      },
+      {
+        word: "または",
+        count: 0,
+      },
+      {
+        word: "かつ",
+        count: 0,
+      },
+      {
+        word: "それぞれ",
+        count: 0,
+      },
+      {
+        word: "のような",
+        count: 0,
+      },
+      {
+        word: "で",
+        count: 0,
+      },
+      {
+        word: "ある",
+        count: 0,
+      },
+      {
+        word: "いる",
+        count: 0,
+      },
+      {
+        word: "、",
+        count: 0,
+      },
+      {
+        word: "。",
+        count: 0,
+      },
+      {
+        word: "！",
+        count: 0,
+      },
+      {
+        word: "？",
+        count: 0,
+      },
     ],
   },
   B: {
@@ -491,24 +545,78 @@ export const WORDLIST = {
       },
     ],
     conjunction: [
-      "は",
-      "が",
-      "の",
-      "に",
-      "と",
-      "みたいな",
-      "とても",
-      "または",
-      "かつ",
-      "それぞれ",
-      "のような",
-      "で",
-      "ある",
-      "いる",
-      "、",
-      "。",
-      "！",
-      "？",
+      {
+        word: "は",
+        count: 0,
+      },
+      {
+        word: "が",
+        count: 0,
+      },
+      {
+        word: "の",
+        count: 0,
+      },
+      {
+        word: "に",
+        count: 0,
+      },
+      {
+        word: "と",
+        count: 0,
+      },
+      {
+        word: "みたいな",
+        count: 0,
+      },
+      {
+        word: "とても",
+        count: 0,
+      },
+      {
+        word: "または",
+        count: 0,
+      },
+      {
+        word: "かつ",
+        count: 0,
+      },
+      {
+        word: "それぞれ",
+        count: 0,
+      },
+      {
+        word: "のような",
+        count: 0,
+      },
+      {
+        word: "で",
+        count: 0,
+      },
+      {
+        word: "ある",
+        count: 0,
+      },
+      {
+        word: "いる",
+        count: 0,
+      },
+      {
+        word: "、",
+        count: 0,
+      },
+      {
+        word: "。",
+        count: 0,
+      },
+      {
+        word: "！",
+        count: 0,
+      },
+      {
+        word: "？",
+        count: 0,
+      },
     ],
   },
   C: {
@@ -747,24 +855,78 @@ export const WORDLIST = {
       },
     ],
     conjunction: [
-      "は",
-      "が",
-      "の",
-      "に",
-      "と",
-      "みたいな",
-      "とても",
-      "または",
-      "かつ",
-      "それぞれ",
-      "のような",
-      "で",
-      "ある",
-      "いる",
-      "、",
-      "。",
-      "！",
-      "？",
+      {
+        word: "は",
+        count: 0,
+      },
+      {
+        word: "が",
+        count: 0,
+      },
+      {
+        word: "の",
+        count: 0,
+      },
+      {
+        word: "に",
+        count: 0,
+      },
+      {
+        word: "と",
+        count: 0,
+      },
+      {
+        word: "みたいな",
+        count: 0,
+      },
+      {
+        word: "とても",
+        count: 0,
+      },
+      {
+        word: "または",
+        count: 0,
+      },
+      {
+        word: "かつ",
+        count: 0,
+      },
+      {
+        word: "それぞれ",
+        count: 0,
+      },
+      {
+        word: "のような",
+        count: 0,
+      },
+      {
+        word: "で",
+        count: 0,
+      },
+      {
+        word: "ある",
+        count: 0,
+      },
+      {
+        word: "いる",
+        count: 0,
+      },
+      {
+        word: "、",
+        count: 0,
+      },
+      {
+        word: "。",
+        count: 0,
+      },
+      {
+        word: "！",
+        count: 0,
+      },
+      {
+        word: "？",
+        count: 0,
+      },
     ],
   },
 };

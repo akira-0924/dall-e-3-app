@@ -1,33 +1,24 @@
 import React from "react";
-import { Word } from "../pages/type";
+import { Word, WordItem, WordObj } from "../pages/type";
 import { WordChip, WordContainer } from "../styled/style";
 import { SizeBox } from "./atoms/SizeBox";
 
 interface Props {
-  list: Word;
-  team: string;
-  addSelectWordList: (word: string) => void;
+  list: WordObj;
+  addSelectWordList: (item: WordItem) => void;
 }
 
-export const WordList = ({
-  list,
-  team,
-  addSelectWordList,
-}: Props): JSX.Element => {
-  let displayList;
-  if (team === "A") {
-    displayList = list.A;
-  } else if (team === "B") {
-    displayList = list.B;
-  } else if (team === "C") {
-    displayList = list.C;
-  }
+export const WordList = ({ list, addSelectWordList }: Props): JSX.Element => {
   return (
     <>
       <WordContainer>
-        {displayList?.noun.map((item, index) => {
+        {list?.noun.map((item, index) => {
           return (
-            <WordChip onClick={() => addSelectWordList(item.word)} key={index}>
+            <WordChip
+              bgColor={item.count === 0 ? "#ffffff" : "#dddddd"}
+              onClick={() => addSelectWordList(item)}
+              key={index}
+            >
               {item.word}
             </WordChip>
           );
@@ -35,10 +26,14 @@ export const WordList = ({
       </WordContainer>
       <SizeBox size={32} />
       <WordContainer>
-        {displayList?.conjunction.map((item, index) => {
+        {list?.conjunction.map((item, index) => {
           return (
-            <WordChip onClick={() => addSelectWordList(item)} key={index}>
-              {item}
+            <WordChip
+              bgColor={item.count === 0 ? "#ffffff" : "#dddddd"}
+              onClick={() => addSelectWordList(item)}
+              key={index}
+            >
+              {item.word}
             </WordChip>
           );
         })}

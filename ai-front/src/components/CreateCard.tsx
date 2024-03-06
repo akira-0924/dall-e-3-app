@@ -10,6 +10,7 @@ interface Props {
   setText: (e: any) => void;
   handleClick: (type: string, e: any) => void;
   selectedWordList: string[];
+  uploadCount: number;
 }
 
 export const CreateCard = ({
@@ -20,6 +21,7 @@ export const CreateCard = ({
   selectedWordList,
   handleClick,
   setText,
+  uploadCount,
 }: Props) => {
   let textValue = selectedWordList.join("");
 
@@ -47,13 +49,15 @@ export const CreateCard = ({
       ></textarea>
       <Button
         text="生成する"
-        color="red"
+        color="green"
+        uploadCount={uploadCount}
         type={ButtonType.Submit}
         handleClick={handleClick}
       />
       <Button
         text="プロンプトを削除する"
-        color="green"
+        color="red"
+        uploadCount={uploadCount}
         type={ButtonType.Button}
         handleClick={handleClick}
       />

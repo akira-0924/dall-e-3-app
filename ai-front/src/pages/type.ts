@@ -8,14 +8,17 @@ export interface ImageData {
   prompt: string;
 }
 
+export interface WordItem {
+  word: string;
+  count: number;
+}
+export interface WordObj {
+  noun: WordItem[];
+  conjunction: WordItem[];
+}
+
 export interface Word {
-  [key: string]: {
-    noun: {
-      word: string;
-      count: number;
-    }[];
-    conjunction: string[];
-  };
+  [key: string]: WordObj;
 }
 
 export enum ButtonType {

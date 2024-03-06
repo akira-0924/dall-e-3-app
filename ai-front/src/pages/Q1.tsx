@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { PageProps, ImageData } from "./type";
+import { PageProps, ImageData, WordItem, WordObj } from "./type";
 import { headers } from "../utils/utils";
 import {
   FeatureLayout,
@@ -13,9 +13,10 @@ import {
   Sum,
 } from "../components/index";
 import { Image } from "../components/atoms/Image";
-// import { WORDLIST } from "../data/word";
+import { WORDLIST } from "../data/word";
 import { useModal } from "../hooks/useModal";
 import { useGetS3Object } from "../hooks/useGetS3Object";
+import { uploadJson } from "../helper";
 
 const url = "http://127.0.0.1:5000/api";
 
@@ -23,10 +24,20 @@ const Q1 = ({ num }: PageProps) => {
   const [text, setText] = useState("");
   const [data, setData] = useState<ImageData[]>([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [uploadCount, setUploadCount] = useState(2);
   const [selectedWordList, setSelectedWordList] = useState<string[]>([]);
+  //JSONを更新してc S3にアップロードする
+  const [json, setJson] = useState<WordObj>(WORDLIST.A);
+  //設問ごとに使うJSONでS3から取得してきたデータを更新せずに使う
+  const [displayData, setDisplayData] = useState<WordObj>(WORDLIST.A);
 
   const { isOpen, onClose, onApply, selectedTeam } = useModal();
-  const { s3Data } = useGetS3Object();
+  const { s3Data } = useGetS3Object(1, selectedTeam);
+
+  useEffect(() => {
+    setJson(s3Data);
+    setDisplayData(s3Data);
+  }, [s3Data]);
 
   const ChangePropmt = (prompt: string) => setText(prompt);
 
@@ -35,7 +46,16 @@ const Q1 = ({ num }: PageProps) => {
     setIsLoading(true);
     await fetchData();
     setIsLoading(false);
+    setUploadCount((prev) => prev + 1);
   };
+
+  useEffect(() => {
+    if (uploadCount === 3) {
+      //S3にJSONをアップロード
+      console.log("called111");
+      uploadJson(json, 2, selectedTeam);
+    }
+  }, [uploadCount]);
 
   const handleClick = (type: string, e: any) => {
     if (type === "button") {
@@ -44,8 +64,15 @@ const Q1 = ({ num }: PageProps) => {
     }
     handleSubmit(e);
   };
-  const addSelectWordList = (word: string) => {
-    setSelectedWordList([...selectedWordList, word]);
+  const addSelectWordList = (item: WordItem) => {
+    const updateJson = json.noun.map((wordObj) => {
+      if (item.word === wordObj.word) {
+        return { ...wordObj, count: item.count + 1 };
+      }
+      return wordObj;
+    });
+    setJson({ ...json, noun: updateJson });
+    setSelectedWordList([...selectedWordList, item.word]);
   };
 
   const fetchData = async () => {
@@ -80,6 +107,7 @@ const Q1 = ({ num }: PageProps) => {
               title="お題"
               src=""
               questionNum={1}
+              uploadCount={uploadCount}
               selectedWordList={selectedWordList}
               disabled={false}
               handleClick={handleClick}
@@ -102,8 +130,7 @@ const Q1 = ({ num }: PageProps) => {
               <div className="">{data?.length > 0 ? data[0].ssim : "0"}</div>
             </div>
             <WordList
-              list={s3Data}
-              team={selectedTeam}
+              list={displayData}
               addSelectWordList={addSelectWordList}
             />
           </FeatureLayout>
