@@ -57,3 +57,79 @@ export const WordChip = styled.span`
     background-color: #dddddd;
   }
 `;
+
+export const ModalContainer = styled.div`
+  background-color: rgba(0, 0, 0, 0.9);
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
+// モーダルウィンドウ
+export const ModalWindow = styled.section`
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  max-width: 600px;
+  width: 80%;
+`;
+
+// モーダルタイトル
+export const ModalTitle = styled.h2`
+  font-size: 24px;
+  margin-bottom: 10px;
+`;
+
+// 閉じるボタン
+export const CloseButton = styled.button`
+  background-color: transparent;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+`;
+
+// モーダルコンテンツ
+export const ModalContent = styled.p`
+  font-size: 16px;
+  line-height: 1.5;
+  margin-bottom: 20px;
+`;
+
+// ボタンコンテナ
+export const ButtonContainer = styled.div`
+  display: flex;
+  justify-content: space-between;
+`;
+
+// ボタン
+export const Button = styled.button`
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+
+  &.closeButton {
+    background-color: #ccc;
+    color: #333;
+  }
+
+  &.nextButton {
+    background-color: #007bff;
+    color: #fff;
+  }
+`;
+
+// セレクトボックス
+export const Select = styled.select`
+  padding: 10px;
+  font-size: 16px;
+`;

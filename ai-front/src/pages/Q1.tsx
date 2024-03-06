@@ -9,10 +9,11 @@ import {
   List,
   Loading,
   WordList,
+  Modal,
 } from "../components/index";
 import { Image } from "../components/atoms/Image";
 import { WORDLIST } from "../data/word";
-import { WordContainer } from "../styled/style";
+import { useModal } from "../hooks/useModal";
 
 const url = "http://127.0.0.1:5000/api";
 
@@ -24,6 +25,9 @@ const Q1 = ({ num }: PageProps) => {
   const [data, setData] = useState<ImageData[]>([]);
   const [isLoading, setIsLoading] = useState(false);
 
+  const { isOpen, onClose, onOpen, onApply, selectedTeam } = useModal();
+
+  console.log(selectedTeam);
   const ChangePropmt = (e: any) => {
     setText(e.target.value);
   };
@@ -60,6 +64,7 @@ const Q1 = ({ num }: PageProps) => {
     <>
       {isLoading && <Loading />}
       <div className="App">
+        {isOpen && <Modal onClose={onClose} onApply={onApply} />}
         <form onSubmit={handleSubmit}>
           <FeatureLayout>
             <CreateCard
@@ -85,9 +90,7 @@ const Q1 = ({ num }: PageProps) => {
               <div className="">類似度</div>
               <div className="">{data?.length > 0 && data[0].ssim}</div>
             </div>
-            {/* <WordContainer> */}
-            <WordList list={WORDLIST} team="A" />
-            {/* </WordContainer> */}
+            <WordList list={WORDLIST} team={selectedTeam} />
           </FeatureLayout>
         </form>
         <List generateList={data} />
