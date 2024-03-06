@@ -10,6 +10,7 @@ import {
   Loading,
   WordList,
   Modal,
+  Sum,
 } from "../components/index";
 import { Image } from "../components/atoms/Image";
 import { WORDLIST } from "../data/word";
@@ -18,6 +19,7 @@ import { useModal } from "../hooks/useModal";
 const url = "http://127.0.0.1:5000/api";
 
 const Q1 = ({ num }: PageProps) => {
+  //json
   const test = JSON.stringify(WORDLIST);
   const tes1 = JSON.parse(test);
 
@@ -108,6 +110,7 @@ const Q1 = ({ num }: PageProps) => {
             />
           </FeatureLayout>
         </form>
+        <Sum data={data} />
         <List generateList={data} />
       </div>
     </>
