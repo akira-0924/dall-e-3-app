@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
 import { WordObj } from "../pages/type";
 import { WORDLIST } from "../data/word";
@@ -16,6 +16,7 @@ export const useGetS3Object = (questionNum: number, team: string) => {
 
   useEffect(() => {
     getJsonData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return { s3Data };

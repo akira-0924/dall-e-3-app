@@ -53,6 +53,7 @@ const QuestionPage = ({ num }: PageProps) => {
     if (uploadCount === 3) {
       uploadJson();
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [uploadCount]);
 
   const handleClick = (type: string, e: any) => {
