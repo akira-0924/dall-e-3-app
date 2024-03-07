@@ -8,8 +8,6 @@ Open AI の DALL-E-3 の API を利用した画像生成 AI から生成した�
 
 # Requirement
 
-"hoge"を動かすのに必要なライブラリなどを列挙する
-
 - Python 3.11.6
 - Flask 2.3.3
 - node v20.9.0
@@ -20,12 +18,6 @@ Open AI の DALL-E-3 の API を利用した画像生成 AI から生成した�
 pip install openai
 pip install scikit-image
 pip install Flask
-```
-
-```bash
-git clone https://github.com/hoge/~
-cd examples
-python demo.py
 ```
 
 # Note
