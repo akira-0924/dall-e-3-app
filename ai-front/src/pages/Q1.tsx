@@ -16,7 +16,6 @@ import { Image } from "../components/atoms/Image";
 import { WORDLIST } from "../data/word";
 import { useModal } from "../hooks/useModal";
 import { useGetS3Object } from "../hooks/useGetS3Object";
-import { uploadJson } from "../helper";
 
 const url = "http://127.0.0.1:5000/api";
 
@@ -51,9 +50,7 @@ const Q1 = ({ num }: PageProps) => {
 
   useEffect(() => {
     if (uploadCount === 3) {
-      //S3にJSONをアップロード
-      console.log("called111");
-      uploadJson(json, 2, selectedTeam);
+      uploadJson();
     }
   }, [uploadCount]);
 
@@ -75,6 +72,21 @@ const Q1 = ({ num }: PageProps) => {
     setSelectedWordList([...selectedWordList, item.word]);
   };
 
+  const uploadJson = async () => {
+    const postData = {
+      json: json,
+      team: selectedTeam,
+      filename: 2,
+    };
+    try {
+      const response = await axios.post(`${url}/upload`, postData, {
+        headers,
+      });
+      console.log("Upload successful:", response);
+    } catch (error) {
+      console.error("Error uploading file:", error);
+    }
+  };
   const fetchData = async () => {
     try {
       const postData = {
