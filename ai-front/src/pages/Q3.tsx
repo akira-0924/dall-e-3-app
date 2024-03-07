@@ -19,16 +19,24 @@ import { useGetS3Object } from "../hooks/useGetS3Object";
 
 const url = "http://127.0.0.1:5000/api";
 
-const Q3 = ({ num }: PageProps) => {
+const Q1 = ({ num }: PageProps) => {
   const [text, setText] = useState("");
   const [data, setData] = useState<ImageData[]>([]);
-  const [uploadCount, setUploadCount] = useState(0);
-  const [json, setJson] = useState<WordObj>(WORDLIST.A);
   const [isLoading, setIsLoading] = useState(false);
+  const [uploadCount, setUploadCount] = useState(0);
   const [selectedWordList, setSelectedWordList] = useState<string[]>([]);
+  //JSONを更新してc S3にアップロードする
+  const [json, setJson] = useState<WordObj>(WORDLIST.A);
+  //設問ごとに使うJSONでS3から取得してきたデータを更新せずに使う
+  const [displayData, setDisplayData] = useState<WordObj>(WORDLIST.A);
 
   const { isOpen, onClose, onApply, selectedTeam } = useModal();
   const { s3Data } = useGetS3Object(3, selectedTeam);
+
+  useEffect(() => {
+    setJson(s3Data);
+    setDisplayData(s3Data);
+  }, [s3Data]);
 
   const ChangePropmt = (prompt: string) => setText(prompt);
 
@@ -37,7 +45,15 @@ const Q3 = ({ num }: PageProps) => {
     setIsLoading(true);
     await fetchData();
     setIsLoading(false);
+    setUploadCount((prev) => prev + 1);
   };
+
+  useEffect(() => {
+    console.log(uploadCount);
+    if (uploadCount === 3) {
+      uploadJson();
+    }
+  }, [uploadCount]);
 
   const handleClick = (type: string, e: any) => {
     if (type === "button") {
@@ -47,9 +63,31 @@ const Q3 = ({ num }: PageProps) => {
     handleSubmit(e);
   };
   const addSelectWordList = (item: WordItem) => {
-    // setSelectedWordList([...selectedWordList, word]);
+    const updateJson = json.noun.map((wordObj) => {
+      if (item.word === wordObj.word) {
+        return { ...wordObj, count: item.count + 1 };
+      }
+      return wordObj;
+    });
+    setJson({ ...json, noun: updateJson });
+    setSelectedWordList([...selectedWordList, item.word]);
   };
 
+  const uploadJson = async () => {
+    const postData = {
+      json: json,
+      team: selectedTeam,
+      filename: 4,
+    };
+    try {
+      const response = await axios.post(`${url}/upload`, postData, {
+        headers,
+      });
+      console.log("Upload successful:", response);
+    } catch (error) {
+      console.error("Error uploading file:", error);
+    }
+  };
   const fetchData = async () => {
     try {
       const postData = {
@@ -81,8 +119,8 @@ const Q3 = ({ num }: PageProps) => {
             <CreateCard
               title="お題"
               src=""
-              uploadCount={uploadCount}
               questionNum={3}
+              uploadCount={uploadCount}
               selectedWordList={selectedWordList}
               disabled={false}
               handleClick={handleClick}
@@ -104,7 +142,10 @@ const Q3 = ({ num }: PageProps) => {
               <div className="">類似度</div>
               <div className="">{data?.length > 0 ? data[0].ssim : "0"}</div>
             </div>
-            <WordList list={json} addSelectWordList={addSelectWordList} />
+            <WordList
+              list={displayData}
+              addSelectWordList={addSelectWordList}
+            />
           </FeatureLayout>
         </form>
         <List generateList={data} />
@@ -114,4 +155,4 @@ const Q3 = ({ num }: PageProps) => {
   );
 };
 
-export default Q3;
+export default Q1;

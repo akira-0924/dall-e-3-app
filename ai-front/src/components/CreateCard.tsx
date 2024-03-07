@@ -49,14 +49,14 @@ export const CreateCard = ({
       ></textarea>
       <Button
         text="生成する"
-        color="green"
+        colorType="generate"
         uploadCount={uploadCount}
         type={ButtonType.Submit}
         handleClick={handleClick}
       />
       <Button
         text="プロンプトを削除する"
-        color="red"
+        colorType="delete"
         uploadCount={uploadCount}
         type={ButtonType.Button}
         handleClick={handleClick}

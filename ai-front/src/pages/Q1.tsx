@@ -23,7 +23,7 @@ const Q1 = ({ num }: PageProps) => {
   const [text, setText] = useState("");
   const [data, setData] = useState<ImageData[]>([]);
   const [isLoading, setIsLoading] = useState(false);
-  const [uploadCount, setUploadCount] = useState(2);
+  const [uploadCount, setUploadCount] = useState(0);
   const [selectedWordList, setSelectedWordList] = useState<string[]>([]);
   //JSONを更新してc S3にアップロードする
   const [json, setJson] = useState<WordObj>(WORDLIST.A);
@@ -43,7 +43,7 @@ const Q1 = ({ num }: PageProps) => {
   const handleSubmit = async (event: any) => {
     event.preventDefault();
     setIsLoading(true);
-    await fetchData();
+    // await fetchData();
     setIsLoading(false);
     setUploadCount((prev) => prev + 1);
   };

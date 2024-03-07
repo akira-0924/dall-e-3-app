@@ -43,14 +43,11 @@ export const WordContainer = styled.div`
   flex-direction: row;
 `;
 
-interface WordChipProps {
-  bgColor?: string;
-}
-export const WordChip = styled.span<WordChipProps>`
+export const WordChip = styled.span`
   min-width: 60px;
   padding: 4px;
   text-align: center;
-  background-color: ${(props) => props.bgColor};
+  background-color: #ffffff;
   display: inline-block;
   margin: 4px;
   border-radius: 20px;
@@ -58,6 +55,19 @@ export const WordChip = styled.span<WordChipProps>`
   border: 1px solid #808080;
   &:hover {
     background-color: #dddddd;
+  }
+`;
+export const WordChipDisabled = styled.span`
+  min-width: 60px;
+  padding: 4px;
+  text-align: center;
+  background-color: #aaaaaa;
+  display: inline-block;
+  margin: 4px;
+  border-radius: 20px;
+  border: 1px solid #aaaaaa;
+  &:hover {
+    background-color: #aaaaaa;
   }
 `;
 
