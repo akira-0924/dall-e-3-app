@@ -70,14 +70,14 @@ const Q1 = ({ num }: PageProps) => {
       return wordObj;
     });
     setJson({ ...json, noun: updateJson });
-    setSelectedWordList([...selectedWordList, item.word]);
+    item.count === 0 && setSelectedWordList([...selectedWordList, item.word]);
   };
 
   const uploadJson = async () => {
     const postData = {
       json: json,
       team: selectedTeam,
-      filename: 2,
+      filename: num + 1,
     };
     try {
       const response = await axios.post(`${url}/upload`, postData, {
@@ -100,7 +100,6 @@ const Q1 = ({ num }: PageProps) => {
           timeout: 600000,
         })
         .then((response) => {
-          console.log(response.data);
           setData([response.data, ...data]);
         })
         .catch((error) => console.error(error));
@@ -119,7 +118,7 @@ const Q1 = ({ num }: PageProps) => {
             <CreateCard
               title="お題"
               src=""
-              questionNum={1}
+              questionNum={num}
               uploadCount={uploadCount}
               selectedWordList={selectedWordList}
               disabled={false}

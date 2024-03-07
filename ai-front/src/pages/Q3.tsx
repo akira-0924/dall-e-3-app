@@ -49,7 +49,6 @@ const Q1 = ({ num }: PageProps) => {
   };
 
   useEffect(() => {
-    console.log(uploadCount);
     if (uploadCount === 3) {
       uploadJson();
     }
@@ -70,7 +69,7 @@ const Q1 = ({ num }: PageProps) => {
       return wordObj;
     });
     setJson({ ...json, noun: updateJson });
-    setSelectedWordList([...selectedWordList, item.word]);
+    item.count === 0 && setSelectedWordList([...selectedWordList, item.word]);
   };
 
   const uploadJson = async () => {
@@ -100,7 +99,6 @@ const Q1 = ({ num }: PageProps) => {
           timeout: 600000,
         })
         .then((response) => {
-          console.log(response.data);
           setData([response.data, ...data]);
         })
         .catch((error) => console.error(error));

@@ -17,9 +17,10 @@ import { WORDLIST } from "../data/word";
 import { useModal } from "../hooks/useModal";
 import { useGetS3Object } from "../hooks/useGetS3Object";
 
-const url = "http://127.0.0.1:5000/api";
+// const url = "http://127.0.0.1:5000/api";
+const url = process.env.REACT_APP_API_ENDPOINT;
 
-const Q1 = ({ num }: PageProps) => {
+const QuestionPage = ({ num }: PageProps) => {
   const [text, setText] = useState("");
   const [data, setData] = useState<ImageData[]>([]);
   const [isLoading, setIsLoading] = useState(false);
@@ -31,7 +32,7 @@ const Q1 = ({ num }: PageProps) => {
   const [displayData, setDisplayData] = useState<WordObj>(WORDLIST.A);
 
   const { isOpen, onClose, onApply, selectedTeam } = useModal();
-  const { s3Data } = useGetS3Object(2, selectedTeam);
+  const { s3Data } = useGetS3Object(num, selectedTeam);
 
   useEffect(() => {
     setJson(s3Data);
@@ -76,7 +77,7 @@ const Q1 = ({ num }: PageProps) => {
     const postData = {
       json: json,
       team: selectedTeam,
-      filename: 3,
+      filename: num + 1,
     };
     try {
       const response = await axios.post(`${url}/upload`, postData, {
@@ -117,7 +118,7 @@ const Q1 = ({ num }: PageProps) => {
             <CreateCard
               title="お題"
               src=""
-              questionNum={2}
+              questionNum={num}
               uploadCount={uploadCount}
               selectedWordList={selectedWordList}
               disabled={false}
@@ -153,4 +154,4 @@ const Q1 = ({ num }: PageProps) => {
   );
 };
 
-export default Q1;
+export default QuestionPage;
