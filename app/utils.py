@@ -28,7 +28,17 @@ def generateImage(text, base_image):
     groundtruth_img = groundtruth_img.convert('L')
     groundtruth_img = groundtruth_img.resize((150, 150))
 
-    client = OpenAI(api_key=os.getenv('OPEN_AI_API_KEY'))
+    ssm = boto3.client('ssm', region_name='ap-northeast-1')
+    ssm_response = ssm.get_parameters(
+        Names=[
+            '/openapi/API_KEY',
+        ],
+        WithDecryption=True
+    )
+    ssm_api_key =  ssm_response['Parameters'][0]['Value']
+    client = OpenAI(api_key=ssm_api_key)
+
+    # client = OpenAI(api_key=os.getenv('OPEN_AI_API_KEY'))
     response = client.images.generate(
         model="dall-e-3",
         prompt=text,

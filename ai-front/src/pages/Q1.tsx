@@ -17,7 +17,8 @@ import { WORDLIST } from "../data/word";
 import { useModal } from "../hooks/useModal";
 import { useGetS3Object } from "../hooks/useGetS3Object";
 
-const url = "http://127.0.0.1:5000/api";
+// const url = "http://127.0.0.1:5000/api";
+const url = process.env.REACT_APP_API_ENDPOINT;
 
 const Q1 = ({ num }: PageProps) => {
   const [text, setText] = useState("");
@@ -43,7 +44,7 @@ const Q1 = ({ num }: PageProps) => {
   const handleSubmit = async (event: any) => {
     event.preventDefault();
     setIsLoading(true);
-    // await fetchData();
+    await fetchData();
     setIsLoading(false);
     setUploadCount((prev) => prev + 1);
   };

@@ -95,6 +95,14 @@ def parse():
         data = request.get_json()
         text = data['post_text']
         base_image = data['base_image']
+        ssm = boto3.client('ssm', region_name='ap-northeast-1')
+        ssm_response = ssm.get_parameters(
+            Names=[
+                '/openapi/API_KEY',
+            ],
+            WithDecryption=True
+        )
+        ssm_api_key =  ssm_response['Parameters'][0]['Value']
         response = generateImage(text, base_image)
         return response
     except Exception as e:
