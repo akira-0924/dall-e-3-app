@@ -64,7 +64,9 @@ jobs:
       - name: ReactApp buildFile S3 Upload
         # run: aws s3 sync ./build s3://tasting-note --delete
         #
-        run: aws s3 cp --recursive --region ${{ secrets.AWS_REGION }} build s3://${{ secrets.AWS_S3_BUCKET_NAME }}
+        run: |
+          cd ai-front
+          aws s3 cp --recursive --region ${{ secrets.AWS_REGION }} build s3://${{ secrets.AWS_S3_BUCKET_NAME }}
 
       - name: docker hub push
         run: |
