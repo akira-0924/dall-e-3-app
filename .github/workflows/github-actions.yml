@@ -24,6 +24,15 @@ jobs:
           cd ai-front
           npm install
 
+      - name: Prepare .env file
+        run: |
+          cd ai-front
+          cat << EOF > .env.production
+          REACT_APP_S3_ENDPOINT=${{ secrets.REACT_APP_S3_ENDPOINT }}
+          REACT_APP_API_ENDPOINT=${{ secrets.REACT_APP_API_ENDPOINT }}
+          REACT_APP_S3_JSON_ENDPOINT=${{ secrets.REACT_APP_S3_JSON_ENDPOINT }}
+          EOF
+
       - name: package install
         run: |
           cd ai-front
@@ -31,11 +40,6 @@ jobs:
 
       - name: docker image build
         run: docker build --platform amd64 -t ${{secrets.DOCKER_HUB_REPO}} .
-
-      - name: docker hub push
-        run: |
-          docker login -u ${{secrets.DOCKER_USERNAME}} -p ${{secrets.DOCKER_PASSWORD}}
-          docker push ${{secrets.DOCKER_HUB_REPO}}
 
   deploy:
     name: Deploy Job
@@ -50,3 +54,19 @@ jobs:
         uses: actions/setup-node@v2
         with:
           node-version: "20"
+
+      - name: Configure AWS credentials
+        run: |
+          aws configure set aws_access_key_id ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws configure set aws_secret_access_key ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws configure set default.region ${{ secrets.AWS_REGION }}
+
+      - name: ReactApp buildFile S3 Upload
+        # run: aws s3 sync ./build s3://tasting-note --delete
+        #
+        run: aws s3 cp --recursive --region ${{ secrets.AWS_REGION }} build s3://${{ secrets.AWS_S3_BUCKET_NAME }}
+
+      - name: docker hub push
+        run: |
+          docker login -u ${{secrets.DOCKER_USERNAME}} -p ${{secrets.DOCKER_PASSWORD}}
+          docker push ${{secrets.DOCKER_HUB_REPO}}
