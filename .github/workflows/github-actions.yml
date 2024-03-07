@@ -37,6 +37,8 @@ jobs:
         run: |
           cd ai-front
           npm run build
+          ls
+          aws s3 sync ./build s3://${{ secrets.AWS_S3_BUCKET_NAME }} --delete
 
       - name: docker image build
         run: docker build --platform amd64 -t ${{secrets.DOCKER_HUB_REPO}} .
@@ -60,14 +62,6 @@ jobs:
           aws configure set aws_access_key_id ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws configure set aws_secret_access_key ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws configure set default.region ${{ secrets.AWS_REGION }}
-
-      - name: ReactApp buildFile S3 Upload
-        # run: aws s3 sync ./build s3://tasting-note --delete
-        #
-        run: |
-          cd ai-front
-          ls
-          aws s3 sync ./build s3://${{ secrets.AWS_S3_BUCKET_NAME }} --delete
 
       - name: docker hub push
         run: |
