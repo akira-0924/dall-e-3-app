@@ -1,5 +1,4 @@
 // process.env.AWS_SDK_LOAD_CONFIG = true;
-import { S3 } from "aws-sdk";
 
 // 使用するprofileを指定する
 process.env.AWS_PROFILE = "cdk";

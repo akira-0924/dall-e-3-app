@@ -11,6 +11,7 @@ export const Sum = ({ data }: Porps) => {
 
   useEffect(() => {
     data.forEach((item) => {
+      // eslint-disable-next-line react-hooks/exhaustive-deps
       ssim_sum = ssim_sum + item.ssim;
     });
     setSum(ssim_sum);

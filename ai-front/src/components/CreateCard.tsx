@@ -27,7 +27,7 @@ export const CreateCard = ({
 
   useEffect(() => {
     setText(textValue);
-  }, [textValue]);
+  }, [setText, textValue]);
   return (
     <div className="sm:w-1/2 mb-10 px-4">
       <div className="text-white text-4xl font-extrabold pb-4 text-left">

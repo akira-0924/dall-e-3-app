@@ -1,5 +1,5 @@
 import React from "react";
-import { Word, WordItem, WordObj } from "../pages/type";
+import { WordItem, WordObj } from "../pages/type";
 import { WordChip, WordChipDisabled, WordContainer } from "../styled/style";
 import { SizeBox } from "./atoms/SizeBox";
 

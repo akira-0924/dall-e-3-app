@@ -1,7 +1,6 @@
 import React from "react";
 import { ImageData } from "../pages/type";
 import { Image } from "./atoms/Image";
-import { viewTextArea } from "../styled/style";
 
 interface Props {
   generateList: ImageData[];
