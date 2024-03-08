@@ -151,7 +151,7 @@ const QuestionPage = ({ num }: PageProps) => {
         </form>
         <List generateList={data} />
         <Sum data={data} />
-        {uploadCount === 3 && num === 1 && (
+        {/* {uploadCount === 3 && num === 1 && (
           <div className="text-white mb-24 font-bold">
             <Link to="/q2" className="flex flex-row justify-center relative">
               <span className="text-white font-bold bg-gradient-to-r from-green-400 via-green-500 to-green-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-green-300 dark:focus:ring-green-800 rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2">
@@ -168,7 +168,7 @@ const QuestionPage = ({ num }: PageProps) => {
               </span>
             </Link>
           </div>
-        )}
+        )} */}
       </div>
     </>
   );
