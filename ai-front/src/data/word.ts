@@ -138,6 +138,10 @@ export const WORDLIST = {
         count: 0,
       },
       {
+        word: "雲",
+        count: 0,
+      },
+      {
         word: "山",
         count: 0,
       },
@@ -222,21 +226,105 @@ export const WORDLIST = {
         count: 0,
       },
       {
-        word: "東京タワー",
+        word: "朝",
         count: 0,
       },
       {
-        word: "東京スカイツリー",
+        word: "夜",
         count: 0,
       },
       {
-        word: "海外",
+        word: "昼",
+        count: 0,
+      },
+      {
+        word: "夕方",
+        count: 0,
+      },
+      {
+        word: "電波塔",
+        count: 0,
+      },
+      {
+        word: "展望台",
+        count: 0,
+      },
+      {
+        word: "タワー型建造物",
+        count: 0,
+      },
+      {
+        word: "鉄骨構造",
+        count: 0,
+      },
+      {
+        word: "円形の展望台",
+        count: 0,
+      },
+      {
+        word: "細長い",
+        count: 0,
+      },
+      {
+        word: "ライトアップ",
+        count: 0,
+      },
+      {
+        word: "都市部",
+        count: 0,
+      },
+      {
+        word: "高層",
+        count: 0,
+      },
+      {
+        word: "尖塔",
+        count: 0,
+      },
+      {
+        word: "頂上",
+        count: 0,
+      },
+      {
+        word: "天井",
+        count: 0,
+      },
+      {
+        word: "オフィス",
+        count: 0,
+      },
+      {
+        word: "ホテル",
+        count: 0,
+      },
+      {
+        word: "タワーマンション",
+        count: 0,
+      },
+      {
+        word: "景観",
+        count: 0,
+      },
+      {
+        word: "雲海を突き抜ける",
+        count: 0,
+      },
+      {
+        word: "圧倒的",
+        count: 0,
+      },
+      {
+        word: "壮大",
         count: 0,
       },
     ],
     conjunction: [
       {
         word: "は",
+        count: 0,
+      },
+      {
+        word: "い",
         count: 0,
       },
       {
@@ -253,6 +341,10 @@ export const WORDLIST = {
       },
       {
         word: "と",
+        count: 0,
+      },
+      {
+        word: "な",
         count: 0,
       },
       {
@@ -448,6 +540,10 @@ export const WORDLIST = {
         count: 0,
       },
       {
+        word: "雲",
+        count: 0,
+      },
+      {
         word: "山",
         count: 0,
       },
@@ -532,21 +628,105 @@ export const WORDLIST = {
         count: 0,
       },
       {
-        word: "東京タワー",
+        word: "朝",
         count: 0,
       },
       {
-        word: "東京スカイツリー",
+        word: "夜",
         count: 0,
       },
       {
-        word: "海外",
+        word: "昼",
+        count: 0,
+      },
+      {
+        word: "夕方",
+        count: 0,
+      },
+      {
+        word: "電波塔",
+        count: 0,
+      },
+      {
+        word: "展望台",
+        count: 0,
+      },
+      {
+        word: "タワー型建造物",
+        count: 0,
+      },
+      {
+        word: "鉄骨構造",
+        count: 0,
+      },
+      {
+        word: "円形の展望台",
+        count: 0,
+      },
+      {
+        word: "細長い",
+        count: 0,
+      },
+      {
+        word: "ライトアップ",
+        count: 0,
+      },
+      {
+        word: "都市部",
+        count: 0,
+      },
+      {
+        word: "高層",
+        count: 0,
+      },
+      {
+        word: "尖塔",
+        count: 0,
+      },
+      {
+        word: "頂上",
+        count: 0,
+      },
+      {
+        word: "天井",
+        count: 0,
+      },
+      {
+        word: "オフィス",
+        count: 0,
+      },
+      {
+        word: "ホテル",
+        count: 0,
+      },
+      {
+        word: "タワーマンション",
+        count: 0,
+      },
+      {
+        word: "景観",
+        count: 0,
+      },
+      {
+        word: "雲海を突き抜ける",
+        count: 0,
+      },
+      {
+        word: "圧倒的",
+        count: 0,
+      },
+      {
+        word: "壮大",
         count: 0,
       },
     ],
     conjunction: [
       {
         word: "は",
+        count: 0,
+      },
+      {
+        word: "い",
         count: 0,
       },
       {
@@ -563,6 +743,10 @@ export const WORDLIST = {
       },
       {
         word: "と",
+        count: 0,
+      },
+      {
+        word: "な",
         count: 0,
       },
       {
@@ -758,6 +942,10 @@ export const WORDLIST = {
         count: 0,
       },
       {
+        word: "雲",
+        count: 0,
+      },
+      {
         word: "山",
         count: 0,
       },
@@ -842,21 +1030,105 @@ export const WORDLIST = {
         count: 0,
       },
       {
-        word: "東京タワー",
+        word: "朝",
         count: 0,
       },
       {
-        word: "東京スカイツリー",
+        word: "夜",
         count: 0,
       },
       {
-        word: "海外",
+        word: "昼",
+        count: 0,
+      },
+      {
+        word: "夕方",
+        count: 0,
+      },
+      {
+        word: "電波塔",
+        count: 0,
+      },
+      {
+        word: "展望台",
+        count: 0,
+      },
+      {
+        word: "タワー型建造物",
+        count: 0,
+      },
+      {
+        word: "鉄骨構造",
+        count: 0,
+      },
+      {
+        word: "円形の展望台",
+        count: 0,
+      },
+      {
+        word: "細長い",
+        count: 0,
+      },
+      {
+        word: "ライトアップ",
+        count: 0,
+      },
+      {
+        word: "都市部",
+        count: 0,
+      },
+      {
+        word: "高層",
+        count: 0,
+      },
+      {
+        word: "尖塔",
+        count: 0,
+      },
+      {
+        word: "頂上",
+        count: 0,
+      },
+      {
+        word: "天井",
+        count: 0,
+      },
+      {
+        word: "オフィス",
+        count: 0,
+      },
+      {
+        word: "ホテル",
+        count: 0,
+      },
+      {
+        word: "タワーマンション",
+        count: 0,
+      },
+      {
+        word: "景観",
+        count: 0,
+      },
+      {
+        word: "雲海を突き抜ける",
+        count: 0,
+      },
+      {
+        word: "圧倒的",
+        count: 0,
+      },
+      {
+        word: "壮大",
         count: 0,
       },
     ],
     conjunction: [
       {
         word: "は",
+        count: 0,
+      },
+      {
+        word: "い",
         count: 0,
       },
       {
@@ -873,6 +1145,10 @@ export const WORDLIST = {
       },
       {
         word: "と",
+        count: 0,
+      },
+      {
+        word: "な",
         count: 0,
       },
       {

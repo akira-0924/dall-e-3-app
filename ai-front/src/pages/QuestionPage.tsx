@@ -35,6 +35,8 @@ const QuestionPage = ({ num }: PageProps) => {
   const { isOpen, onClose, onApply, selectedTeam } = useModal();
   const { s3Data } = useGetS3Object(num, selectedTeam);
 
+  console.log(JSON.stringify(WORDLIST.A));
+
   useEffect(() => {
     setJson(s3Data);
     setDisplayData(s3Data);
