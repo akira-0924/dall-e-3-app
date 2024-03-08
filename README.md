@@ -27,7 +27,7 @@ pip install Flask
 
 # Infrastructure
 
-<img src="images/ai-app.png">
+<img src="images/ai-app_ver3_complete.png">
 <br>
 
 # Language and FrameWork
