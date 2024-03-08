@@ -30,7 +30,7 @@ pip install Flask
 <img src="images/ai-app.png">
 <br>
 
-# Language or FrameWork
+# Language and FrameWork
 
 <img src="https://img.shields.io/badge/-TypeScript-111111.svg?logo=typescript&style=#3178C6&logoColor=#3178C6" height="30px">
 
