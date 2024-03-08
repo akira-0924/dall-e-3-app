@@ -102,6 +102,8 @@ const QuestionPage = ({ num }: PageProps) => {
           timeout: 600000,
         })
         .then((response) => {
+          response.data.ssim = Math.round(response.data.ssim * 100);
+          console.log(response.data);
           setData([response.data, ...data]);
         })
         .catch((error) => console.error(error));
@@ -141,7 +143,9 @@ const QuestionPage = ({ num }: PageProps) => {
                 )}
               </div>
               <div className="">類似度</div>
-              <div className="">{data?.length > 0 ? data[0].ssim : "0"}</div>
+              <div className="">
+                {data?.length > 0 ? data[0].ssim : "0"}/100点
+              </div>
             </div>
             <WordList
               list={displayData}
@@ -151,24 +155,6 @@ const QuestionPage = ({ num }: PageProps) => {
         </form>
         <List generateList={data} />
         <Sum data={data} />
-        {/* {uploadCount === 3 && num === 1 && (
-          <div className="text-white mb-24 font-bold">
-            <Link to="/q2" className="flex flex-row justify-center relative">
-              <span className="text-white font-bold bg-gradient-to-r from-green-400 via-green-500 to-green-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-green-300 dark:focus:ring-green-800 rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2">
-                Q2へ
-              </span>
-            </Link>
-          </div>
-        )}
-        {uploadCount === 3 && num === 2 && (
-          <div className="text-white mb-24 font-bold">
-            <Link to="/q3" className="flex flex-row">
-              <span className="text-white bg-gradient-to-r from-green-400 via-green-500 to-green-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-green-300 dark:focus:ring-green-800 font-bold rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2">
-                Q3へ
-              </span>
-            </Link>
-          </div>
-        )} */}
       </div>
     </>
   );

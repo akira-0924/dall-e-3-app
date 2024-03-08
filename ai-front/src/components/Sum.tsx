@@ -19,7 +19,7 @@ export const Sum = ({ data }: Porps) => {
 
   return (
     <h1 className="text-white text-3xl font-bold mb-24 mt-16">
-      合計点：<span className="text-red-500">{sum}</span>
+      合計点：<span className="text-red-500">{sum}/300点</span>
     </h1>
   );
 };
