@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from "react";
+import { useState } from "react";
 import axios from "axios";
-import { PageProps, ImageData, WordItem, WordObj } from "./type";
+import { ImageData, WordItem, WordObj } from "./type";
 import { headers } from "../utils/utils";
 import {
   FeatureLayout,
@@ -9,36 +9,24 @@ import {
   List,
   Loading,
   WordList,
-  Modal,
   Sum,
 } from "../components/index";
 import { Image } from "../components/atoms/Image";
-import { WORDLIST } from "../data/word";
-import { useModal } from "../hooks/useModal";
-import { useGetS3Object } from "../hooks/useGetS3Object";
-// import { Link } from "react-router-dom";
+import { WORDLIST } from "../data/word_sample";
 
 // const url = "http://127.0.0.1:5000/api";
 const url = process.env.REACT_APP_API_ENDPOINT;
 
-const QuestionPage = ({ num }: PageProps) => {
+const QuestionSample = () => {
   const [text, setText] = useState("");
   const [data, setData] = useState<ImageData[]>([]);
   const [isLoading, setIsLoading] = useState(false);
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [uploadCount, setUploadCount] = useState(0);
   const [selectedWordList, setSelectedWordList] = useState<string[]>([]);
-  //JSONを更新してc S3にアップロードする
-  const [json, setJson] = useState<WordObj>(WORDLIST.A);
   //設問ごとに使うJSONでS3から取得してきたデータを更新せずに使う
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [displayData, setDisplayData] = useState<WordObj>(WORDLIST.A);
-
-  const { isOpen, onClose, onApply, selectedTeam } = useModal();
-  const { s3Data } = useGetS3Object(num, selectedTeam);
-
-  useEffect(() => {
-    setJson(s3Data);
-    setDisplayData(s3Data);
-  }, [s3Data]);
 
   const ChangePropmt = (prompt: string) => setText(prompt);
 
@@ -47,15 +35,7 @@ const QuestionPage = ({ num }: PageProps) => {
     setIsLoading(true);
     await fetchData();
     setIsLoading(false);
-    setUploadCount((prev) => prev + 1);
   };
-
-  useEffect(() => {
-    if (uploadCount === 3) {
-      uploadJson();
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [uploadCount]);
 
   const handleClick = (type: string, e: any) => {
     if (type === "button") {
@@ -65,36 +45,14 @@ const QuestionPage = ({ num }: PageProps) => {
     handleSubmit(e);
   };
   const addSelectWordList = (item: WordItem) => {
-    const updateJson = json.noun.map((wordObj) => {
-      if (item.word === wordObj.word) {
-        return { ...wordObj, count: item.count + 1 };
-      }
-      return wordObj;
-    });
-    setJson({ ...json, noun: updateJson });
     item.count === 0 && setSelectedWordList([...selectedWordList, item.word]);
   };
 
-  const uploadJson = async () => {
-    const postData = {
-      json: json,
-      team: selectedTeam,
-      filename: num + 1,
-    };
-    try {
-      const response = await axios.post(`${url}/upload`, postData, {
-        headers,
-      });
-      console.log("Upload successful:", response);
-    } catch (error) {
-      console.error("Error uploading file:", error);
-    }
-  };
   const fetchData = async () => {
     try {
       const postData = {
         post_text: text,
-        base_image: `${process.env.REACT_APP_S3_ENDPOINT}/theme${num}.png`,
+        base_image: `${process.env.REACT_APP_S3_ENDPOINT}/theme0.png`,
       };
       await axios
         .post(`${url}/generateImage`, postData, {
@@ -116,13 +74,12 @@ const QuestionPage = ({ num }: PageProps) => {
     <>
       {isLoading && <Loading />}
       <div className="App">
-        {isOpen && <Modal onClose={onClose} onApply={onApply} />}
         <form>
           <FeatureLayout>
             <CreateCard
               title="お題"
               src=""
-              questionNum={num}
+              questionNum={0}
               uploadCount={uploadCount}
               selectedWordList={selectedWordList}
               disabled={false}
@@ -160,4 +117,4 @@ const QuestionPage = ({ num }: PageProps) => {
   );
 };
 
-export default QuestionPage;
+export default QuestionSample;
