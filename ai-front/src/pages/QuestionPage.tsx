@@ -102,7 +102,8 @@ const QuestionPage = ({ num }: PageProps) => {
           timeout: 600000,
         })
         .then((response) => {
-          response.data.ssim = Math.round(response.data.ssim * 100);
+          const percent = response.data.ssim * 100;
+          response.data.ssim = parseFloat(percent.toFixed(1));
           console.log(response.data);
           setData([response.data, ...data]);
         })
