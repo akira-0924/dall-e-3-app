@@ -61,28 +61,6 @@ def upload_to_s3():
         # エラーが発生した場合はエラーメッセージを返す
         return jsonify(message='サーバーエラーが発生しました'), 500
 
-# @app.route("/api/upload", methods=['GET', 'POST'])
-# def index3():
-#     print("called Flask")
-#     if request.method == 'POST':
-#         json_data = request.json['json']
-#         team = request.json['team']
-#         filename = request.json['filename'] 
-#         json_data = json.dumps(json_data).encode('utf-8')
-#         s3_dir = f'team{team}'
-#         file_name = f'q{filename}.json'
-#         key = f'{s3_dir}/{file_name}'
-#         s3 = boto3.client('s3', region_name = 'ap-northeast-1')
-#         response = s3.put_object(
-#             Body = json_data,
-#             Bucket = "wordlist-json-20240306",
-#             Key = key
-#         )
-#         if response['ResponseMetadata']['HTTPStatusCode'] != 200:
-#             return jsonify(message='S3へのアップロードでエラーが発生しました'), 500
-#         return "アップロードに成功しました"
-
-
 @app.route('/api/data', methods=['GET'])
 def get_data():
     data = {'name': 'tarou', 'age': 30, 'job': 'developer'}
