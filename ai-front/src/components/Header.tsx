@@ -3,7 +3,7 @@ import React from "react";
 export const Header = () => {
   return (
     <nav className="w-full bg-gray-900 pt-4 pb-4 fixed">
-      <div className="flex justify-between bg-gray-900 max-w-5xl mx-auto">
+      <div className="pl-4 bg-gray-900">
         <div className="ml-2 flex items-center bg-gray-900">
           <svg
             xmlns="http://www.w3.org/2000/svg"
