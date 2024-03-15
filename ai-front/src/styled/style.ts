@@ -61,18 +61,30 @@ export const WordChipDisabled = styled.span`
   min-width: 60px;
   padding: 4px;
   text-align: center;
-  background-color: #aaaaaa;
+  background-color: #888888;
   display: inline-block;
   margin: 4px;
   border-radius: 20px;
-  border: 1px solid #aaaaaa;
+  border: 1px solid #888888;
   &:hover {
-    background-color: #aaaaaa;
+    background-color: #888888;
   }
 `;
 
 export const ModalContainer = styled.div`
   background-color: rgba(0, 0, 0, 0.9);
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
+export const SubmitModalContainer = styled.div`
+  background-color: rgba(0, 0, 0, 0.8);
   position: fixed;
   top: 0;
   left: 0;
@@ -90,6 +102,14 @@ export const ModalWindow = styled.section`
   border-radius: 8px;
   max-width: 600px;
   width: 80%;
+`;
+
+export const SubmitModalWindow = styled.section`
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  max-width: 400px;
+  width: 60%;
 `;
 
 // モーダルタイトル

@@ -10,6 +10,7 @@ import {
   Loading,
   WordList,
   Sum,
+  SubmitModal,
 } from "../components/index";
 import { Image } from "../components/atoms/Image";
 import { WORDLIST } from "../data/word_sample";
@@ -48,10 +49,14 @@ const QuestionSample = () => {
 
   const handleClick = (type: string, e: any) => {
     if (type === "button") {
+      setIsSubmitModal(false);
+      return;
+    } else if (type === "reset") {
       setSelectedWordList([]);
       return;
     }
     handleSubmit(e);
+    setIsSubmitModal(false);
   };
   const addSelectWordList = (item: WordItem) => {
     item.count === 0 && setSelectedWordList([...selectedWordList, item.word]);
@@ -82,6 +87,7 @@ const QuestionSample = () => {
   return (
     <>
       {isLoading && <Loading />}
+      {isSubmitModal && <SubmitModal handleClick={handleClick} />}
       <div className="App">
         <form>
           <FeatureLayout>
