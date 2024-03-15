@@ -23,7 +23,9 @@ const QuestionSample2 = () => {
     event.preventDefault();
     setIsLoading(true);
     await fetchData();
-    setIsLoading(false);
+    setTimeout(() => {
+      setIsLoading(false);
+    }, 6500);
   };
 
   const fetchData = async () => {

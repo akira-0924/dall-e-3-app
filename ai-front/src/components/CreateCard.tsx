@@ -9,6 +9,7 @@ interface Props {
   disabled: boolean;
   setText: (e: any) => void;
   handleClick: (type: string, e: any) => void;
+  openSubmitModal: (type: string) => void;
   selectedWordList: string[];
   uploadCount: number;
 }
@@ -20,6 +21,7 @@ export const CreateCard = ({
   questionNum,
   selectedWordList,
   handleClick,
+  openSubmitModal,
   setText,
   uploadCount,
 }: Props) => {
@@ -51,15 +53,17 @@ export const CreateCard = ({
         text="生成する"
         colorType="generate"
         uploadCount={uploadCount}
-        type={ButtonType.Submit}
+        type={ButtonType.Button}
         handleClick={handleClick}
+        openSubmitModal={openSubmitModal}
       />
       <Button
         text="プロンプトを削除する"
         colorType="delete"
         uploadCount={uploadCount}
-        type={ButtonType.Button}
+        type={ButtonType.Reset}
         handleClick={handleClick}
+        openSubmitModal={openSubmitModal}
       />
     </div>
   );

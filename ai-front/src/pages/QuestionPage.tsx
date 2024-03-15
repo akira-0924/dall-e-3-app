@@ -11,6 +11,7 @@ import {
   WordList,
   Modal,
   Sum,
+  SubmitModal,
 } from "../components/index";
 import { Image } from "../components/atoms/Image";
 import { WORDLIST } from "../data/word";
@@ -25,6 +26,7 @@ const QuestionPage = ({ num }: PageProps) => {
   const [text, setText] = useState("");
   const [data, setData] = useState<ImageData[]>([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [isSubmitModal, setIsSubmitModal] = useState(false);
   const [uploadCount, setUploadCount] = useState(0);
   const [selectedWordList, setSelectedWordList] = useState<string[]>([]);
   //JSONを更新してc S3にアップロードする
@@ -46,8 +48,10 @@ const QuestionPage = ({ num }: PageProps) => {
     event.preventDefault();
     setIsLoading(true);
     await fetchData();
-    setIsLoading(false);
     setUploadCount((prev) => prev + 1);
+    setTimeout(() => {
+      setIsLoading(false);
+    }, 5000);
   };
 
   useEffect(() => {
@@ -59,11 +63,24 @@ const QuestionPage = ({ num }: PageProps) => {
 
   const handleClick = (type: string, e: any) => {
     if (type === "button") {
+      setIsSubmitModal(false);
+      return;
+    } else if (type === "reset") {
       setSelectedWordList([]);
       return;
     }
     handleSubmit(e);
+    setIsSubmitModal(false);
   };
+
+  const openModal = (type: string) => {
+    if (type === "button") {
+      setIsSubmitModal(true);
+    } else {
+      setIsSubmitModal(false);
+    }
+  };
+
   const addSelectWordList = (item: WordItem) => {
     const updateJson = json.noun.map((wordObj) => {
       if (item.word === wordObj.word) {
@@ -118,6 +135,7 @@ const QuestionPage = ({ num }: PageProps) => {
       {isLoading && <Loading />}
       <div className="App">
         {isOpen && <Modal onClose={onClose} onApply={onApply} />}
+        {isSubmitModal && <SubmitModal handleClick={handleClick} />}
         <form>
           <FeatureLayout>
             <CreateCard
@@ -128,6 +146,7 @@ const QuestionPage = ({ num }: PageProps) => {
               selectedWordList={selectedWordList}
               disabled={false}
               handleClick={handleClick}
+              openSubmitModal={openModal}
               setText={(prompt) => {
                 ChangePropmt(prompt);
               }}

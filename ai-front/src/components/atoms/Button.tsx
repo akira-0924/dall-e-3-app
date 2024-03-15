@@ -6,16 +6,24 @@ interface Props {
   type: ButtonType;
   uploadCount: number;
   handleClick: (type: string, e: any) => void;
+  openSubmitModal: (type: string) => void;
 }
 
-const Button = ({ colorType, text, type, handleClick, uploadCount }: Props) => {
+const Button = ({
+  colorType,
+  text,
+  type,
+  handleClick,
+  uploadCount,
+  openSubmitModal,
+}: Props) => {
   return (
     <>
       {colorType === "generate" && uploadCount !== 3 && (
         <button
           className={`flex mx-auto mt-6 text-white bg-green-600 border-0 py-2 px-5 focus:outline-none hover:bg-green-500 rounded`}
           type={type}
-          onClick={(e) => handleClick(type, e)}
+          onClick={() => openSubmitModal(type)}
         >
           {text}
         </button>

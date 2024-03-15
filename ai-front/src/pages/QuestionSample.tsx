@@ -21,6 +21,7 @@ const QuestionSample = () => {
   const [text, setText] = useState("");
   const [data, setData] = useState<ImageData[]>([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [isSubmitModal, setIsSubmitModal] = useState(false);
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [uploadCount, setUploadCount] = useState(0);
   const [selectedWordList, setSelectedWordList] = useState<string[]>([]);
@@ -35,6 +36,14 @@ const QuestionSample = () => {
     setIsLoading(true);
     await fetchData();
     setIsLoading(false);
+  };
+
+  const openModal = (type: string) => {
+    if (type === "button") {
+      setIsSubmitModal(true);
+    } else {
+      setIsSubmitModal(false);
+    }
   };
 
   const handleClick = (type: string, e: any) => {
@@ -84,6 +93,7 @@ const QuestionSample = () => {
               selectedWordList={selectedWordList}
               disabled={false}
               handleClick={handleClick}
+              openSubmitModal={openModal}
               setText={(prompt) => {
                 ChangePropmt(prompt);
               }}
