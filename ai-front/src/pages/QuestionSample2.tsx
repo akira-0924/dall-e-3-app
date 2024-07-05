@@ -10,6 +10,7 @@ import {
   Sum,
 } from "../components/index";
 import { Image } from "../components/atoms/Image";
+import { Title } from "../components/atoms/Title";
 
 // const url = "http://127.0.0.1:5000/api";
 const url = process.env.REACT_APP_API_ENDPOINT;
@@ -58,9 +59,7 @@ const QuestionSample2 = () => {
         <form>
           <FeatureLayout>
             <div className="sm:w-1/2 mb-10 px-4">
-              <div className="text-white text-4xl font-extrabold pb-4 text-left">
-                お題
-              </div>
+              <Title title="お題" />
               <div className="rounded-lg h-84 overflow-hidden">
                 <img
                   alt="content"

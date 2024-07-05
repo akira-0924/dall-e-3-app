@@ -14,6 +14,7 @@ import {
   SubmitModal,
 } from "../components/index";
 import { Image } from "../components/atoms/Image";
+import { Title } from "../components/atoms/Title";
 import { WORDLIST } from "../data/word";
 import { useModal } from "../hooks/useModal";
 import { useGetS3Object } from "../hooks/useGetS3Object";
@@ -150,9 +151,7 @@ const QuestionPage = ({ num }: PageProps) => {
               }}
             />
             <div className="sm:w-1/2 mb-10 px-4 text-white">
-              <div className="text-white text-4xl font-extrabold pb-4 text-left">
-                生成画像
-              </div>
+              <Title title="生成画像" />
               <div className="rounded-lg h-84 overflow-hidden">
                 {data?.length > 0 && data[0].image ? (
                   <GeneratedImage image_url={data[0].image} />

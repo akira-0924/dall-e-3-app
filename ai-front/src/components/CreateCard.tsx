@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import Button from "./atoms/Button";
+import { Title } from "./atoms/Title";
 import { ButtonType } from "../pages/type";
 
 interface Props {
@@ -32,9 +33,7 @@ export const CreateCard = ({
   }, [setText, textValue]);
   return (
     <div className="sm:w-1/2 mb-10 px-4">
-      <div className="text-white text-4xl font-extrabold pb-4 text-left">
-        {title}
-      </div>
+      <Title title={title} />
       <div className="rounded-lg h-84 overflow-hidden">
         <img
           alt="content"
