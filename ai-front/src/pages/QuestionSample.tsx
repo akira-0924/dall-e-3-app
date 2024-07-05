@@ -32,7 +32,7 @@ const QuestionSample = () => {
 
   const ChangePropmt = (prompt: string) => setText(prompt);
 
-  const handleSubmit = async (event: any) => {
+  const handleSubmit = async (event: React.MouseEvent<HTMLInputElement>) => {
     event.preventDefault();
     setIsLoading(true);
     await fetchData();
@@ -47,7 +47,7 @@ const QuestionSample = () => {
     }
   };
 
-  const handleClick = (type: string, e: any) => {
+  const handleClick = (type: string, e: React.MouseEvent<HTMLInputElement>) => {
     if (type === "button") {
       setIsSubmitModal(false);
       return;

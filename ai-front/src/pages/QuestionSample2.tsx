@@ -19,7 +19,9 @@ const QuestionSample2 = () => {
   const [data, setData] = useState<ImageData[]>([]);
   const [isLoading, setIsLoading] = useState(false);
 
-  const handleSubmit = async (event: any) => {
+  const handleSubmit = async (
+    event: React.MouseEvent<HTMLButtonElement, MouseEvent>
+  ) => {
     event.preventDefault();
     setIsLoading(true);
     await fetchData();
@@ -74,7 +76,12 @@ const QuestionSample2 = () => {
               >
                 {text}
               </textarea>
-              <button type="submit" onClick={(e) => handleSubmit(e)}>
+              <button
+                type="submit"
+                onClick={(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) =>
+                  handleSubmit(e)
+                }
+              >
                 生成する
               </button>
             </div>

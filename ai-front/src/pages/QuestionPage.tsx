@@ -17,9 +17,7 @@ import { Image } from "../components/atoms/Image";
 import { WORDLIST } from "../data/word";
 import { useModal } from "../hooks/useModal";
 import { useGetS3Object } from "../hooks/useGetS3Object";
-// import { Link } from "react-router-dom";
 
-// const url = "http://127.0.0.1:5000/api";
 const url = process.env.REACT_APP_API_ENDPOINT;
 
 const QuestionPage = ({ num }: PageProps) => {
@@ -44,7 +42,7 @@ const QuestionPage = ({ num }: PageProps) => {
 
   const ChangePropmt = (prompt: string) => setText(prompt);
 
-  const handleSubmit = async (event: any) => {
+  const handleSubmit = async (event: React.MouseEvent<HTMLInputElement>) => {
     event.preventDefault();
     setIsLoading(true);
     await fetchData();
@@ -61,7 +59,7 @@ const QuestionPage = ({ num }: PageProps) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [uploadCount]);
 
-  const handleClick = (type: string, e: any) => {
+  const handleClick = (type: string, e: React.MouseEvent<HTMLInputElement>) => {
     if (type === "button") {
       setIsSubmitModal(false);
       return;
