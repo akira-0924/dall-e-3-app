@@ -9,7 +9,7 @@ interface Props {
   questionNum: number;
   disabled: boolean;
   setText: (e: any) => void;
-  handleClick: (type: string, e: any) => void;
+  handleClick: (type: string, e: React.MouseEvent<HTMLInputElement>) => void;
   openSubmitModal: (type: string) => void;
   selectedWordList: string[];
   uploadCount: number;
@@ -17,8 +17,6 @@ interface Props {
 
 export const CreateCard = ({
   title,
-  src,
-  disabled,
   questionNum,
   selectedWordList,
   handleClick,

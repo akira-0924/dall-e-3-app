@@ -8,3 +8,4 @@ export { WordList } from "./WordList";
 export { Modal } from "./Modal";
 export { Sum } from "./Sum";
 export { SubmitModal } from "./SubmitModal";
+export { ImageField } from "./ImageField";

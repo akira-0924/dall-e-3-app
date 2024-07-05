@@ -5,13 +5,13 @@ import { headers } from "../utils/utils";
 import {
   FeatureLayout,
   CreateCard,
-  GeneratedImage,
   List,
   Loading,
   WordList,
   Modal,
   Sum,
   SubmitModal,
+  ImageField,
 } from "../components/index";
 import { Image } from "../components/atoms/Image";
 import { Title } from "../components/atoms/Title";
@@ -150,20 +150,7 @@ const QuestionPage = ({ num }: PageProps) => {
                 ChangePropmt(prompt);
               }}
             />
-            <div className="sm:w-1/2 mb-10 px-4 text-white">
-              <Title title="生成画像" />
-              <div className="rounded-lg h-84 overflow-hidden">
-                {data?.length > 0 && data[0].image ? (
-                  <GeneratedImage image_url={data[0].image} />
-                ) : (
-                  <Image image_url="/generated_images/HTML.png" />
-                )}
-              </div>
-              <div className="">類似度</div>
-              <div className="">
-                {data?.length > 0 ? data[0].ssim : "0"}/100点
-              </div>
-            </div>
+            <ImageField data={data} />
             <WordList
               list={displayData}
               addSelectWordList={addSelectWordList}

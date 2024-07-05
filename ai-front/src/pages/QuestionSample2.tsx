@@ -8,6 +8,7 @@ import {
   List,
   Loading,
   Sum,
+  ImageField,
 } from "../components/index";
 import { Image } from "../components/atoms/Image";
 import { Title } from "../components/atoms/Title";
@@ -84,22 +85,7 @@ const QuestionSample2 = () => {
                 生成する
               </button>
             </div>
-            <div className="sm:w-1/2 mb-10 px-4 text-white">
-              <div className="text-white text-4xl font-extrabold pb-4 text-left">
-                生成画像
-              </div>
-              <div className="rounded-lg h-84 overflow-hidden">
-                {data?.length > 0 && data[0].image ? (
-                  <GeneratedImage image_url={data[0].image} />
-                ) : (
-                  <Image image_url="/generated_images/HTML.png" />
-                )}
-              </div>
-              <div className="">類似度</div>
-              <div className="">
-                {data?.length > 0 ? data[0].ssim : "0"}/100点
-              </div>
-            </div>
+            <ImageField data={data} />
           </FeatureLayout>
         </form>
         <List generateList={data} />
