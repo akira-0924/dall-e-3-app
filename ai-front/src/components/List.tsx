@@ -1,6 +1,7 @@
 import React from "react";
 import { ImageData } from "../pages/type";
 import { Image } from "./atoms/Image";
+import { WORD } from "../utils/constant";
 
 interface Props {
   generateList: ImageData[];
@@ -21,7 +22,7 @@ export const List = ({ generateList }: Props) => {
                   <Image image_url={item.image} />
                 </div>
                 <h2 className="text-xl font-medium title-font text-white mt-5">
-                  類似度：{item.ssim}
+                  {WORD.COMPARE}：{item.ssim}
                 </h2>
                 <textarea
                   cols={30}

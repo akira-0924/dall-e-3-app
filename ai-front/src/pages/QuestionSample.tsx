@@ -12,9 +12,8 @@ import {
   SubmitModal,
   ImageField,
 } from "../components/index";
-import { Image } from "../components/atoms/Image";
-import { Title } from "../components/atoms/Title";
 import { WORDLIST } from "../data/word_sample";
+import { WORD } from "../utils/constant";
 
 // const url = "http://127.0.0.1:5000/api";
 const url = process.env.REACT_APP_API_ENDPOINT;
@@ -93,7 +92,7 @@ const QuestionSample = () => {
         <form>
           <FeatureLayout>
             <CreateCard
-              title="お題"
+              title={WORD.CREATE_CART_TITLE}
               src=""
               questionNum={0}
               uploadCount={uploadCount}

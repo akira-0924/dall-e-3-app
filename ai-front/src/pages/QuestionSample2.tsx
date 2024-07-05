@@ -4,14 +4,13 @@ import { ImageData } from "./type";
 import { headers } from "../utils/utils";
 import {
   FeatureLayout,
-  GeneratedImage,
   List,
   Loading,
   Sum,
   ImageField,
 } from "../components/index";
-import { Image } from "../components/atoms/Image";
 import { Title } from "../components/atoms/Title";
+import { WORD } from "../utils/constant";
 
 // const url = "http://127.0.0.1:5000/api";
 const url = process.env.REACT_APP_API_ENDPOINT;
@@ -60,7 +59,7 @@ const QuestionSample2 = () => {
         <form>
           <FeatureLayout>
             <div className="sm:w-1/2 mb-10 px-4">
-              <Title title="お題" />
+              <Title title={WORD.CREATE_CART_TITLE} />
               <div className="rounded-lg h-84 overflow-hidden">
                 <img
                   alt="content"
@@ -69,7 +68,7 @@ const QuestionSample2 = () => {
                   src={`${process.env.REACT_APP_S3_ENDPOINT}/theme0.png`}
                 />
               </div>
-              <p className="mt-6 text-left text-white">プロンプト</p>
+              <p className="mt-6 text-left text-white">{WORD.HEAD}</p>
               <textarea
                 onChange={(e) => setText(e.target.value)}
                 className="w-full leading-relaxed text-base p-4 mt-4"
@@ -82,7 +81,7 @@ const QuestionSample2 = () => {
                   handleSubmit(e)
                 }
               >
-                生成する
+                {WORD.GENERATE_BTN}
               </button>
             </div>
             <ImageField data={data} />

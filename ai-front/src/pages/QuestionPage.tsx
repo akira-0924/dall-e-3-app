@@ -13,11 +13,10 @@ import {
   SubmitModal,
   ImageField,
 } from "../components/index";
-import { Image } from "../components/atoms/Image";
-import { Title } from "../components/atoms/Title";
 import { WORDLIST } from "../data/word";
 import { useModal } from "../hooks/useModal";
 import { useGetS3Object } from "../hooks/useGetS3Object";
+import { UPLOAD_COUNT, WORD } from "../utils/constant";
 
 const url = process.env.REACT_APP_API_ENDPOINT;
 
@@ -54,7 +53,7 @@ const QuestionPage = ({ num }: PageProps) => {
   };
 
   useEffect(() => {
-    if (uploadCount === 3) {
+    if (uploadCount === UPLOAD_COUNT) {
       uploadJson();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -138,7 +137,7 @@ const QuestionPage = ({ num }: PageProps) => {
         <form>
           <FeatureLayout>
             <CreateCard
-              title="お題"
+              title={WORD.CREATE_CART_TITLE}
               src=""
               questionNum={num}
               uploadCount={uploadCount}

@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import Button from "./atoms/Button";
 import { Title } from "./atoms/Title";
 import { ButtonType } from "../pages/type";
+import { WORD } from "../utils/constant";
 
 interface Props {
   title: string;
@@ -40,14 +41,14 @@ export const CreateCard = ({
           src={`${process.env.REACT_APP_S3_ENDPOINT}/theme${questionNum}.png`}
         />
       </div>
-      <p className="mt-6 text-left text-white">プロンプト</p>
+      <p className="mt-6 text-left text-white">{WORD.HEAD}</p>
       <textarea
         className="w-full leading-relaxed text-base p-4 mt-4"
         value={textValue}
         readOnly
       ></textarea>
       <Button
-        text="生成する"
+        text={WORD.GENERATE_BTN}
         colorType="generate"
         uploadCount={uploadCount}
         type={ButtonType.Button}
@@ -55,7 +56,7 @@ export const CreateCard = ({
         openSubmitModal={openSubmitModal}
       />
       <Button
-        text="プロンプトを削除する"
+        text={WORD.DELETE_BTN}
         colorType="delete"
         uploadCount={uploadCount}
         type={ButtonType.Reset}
