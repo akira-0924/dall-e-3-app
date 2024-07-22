@@ -27,7 +27,23 @@ pip install Flask
 
 # Infrastructure
 
+**現在**
 <img src="images/ai-app_ver3_complete.png">
+<br>
+
+**改善 ver**
+
+- コンテナとして App Runner を使用
+
+<img src="images/ver4.png">
+
+<br>
+
+**サーバーレスアーキテクチャ ver**
+
+- EFS MountTarget を使用してマウントする
+
+<img src="images/ver2.png">
 <br>
 
 # Language and FrameWork
