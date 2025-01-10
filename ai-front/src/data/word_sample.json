@@ -1,0 +1,36 @@
+{
+  "noun": [
+    { "word": "おばあちゃん", "count": 0 },
+    { "word": "おもち", "count": 0 },
+    { "word": "黄色", "count": 0 },
+    { "word": "白", "count": 0 },
+    { "word": "緑", "count": 0 },
+    { "word": "白", "count": 0 },
+    { "word": "黒", "count": 0 },
+    { "word": "緑", "count": 0 },
+    { "word": "かわいい", "count": 0 },
+    { "word": "綺麗な", "count": 0 }
+  ],
+  "conjunction": [
+    { "word": "は", "count": 0 },
+    { "word": "い", "count": 0 },
+    { "word": "が", "count": 0 },
+    { "word": "の", "count": 0 },
+    { "word": "に", "count": 0 },
+    { "word": "と", "count": 0 },
+    { "word": "な", "count": 0 },
+    { "word": "みたいな", "count": 0 },
+    { "word": "とても", "count": 0 },
+    { "word": "または", "count": 0 },
+    { "word": "かつ", "count": 0 },
+    { "word": "それぞれ", "count": 0 },
+    { "word": "のような", "count": 0 },
+    { "word": "で", "count": 0 },
+    { "word": "ある", "count": 0 },
+    { "word": "いる", "count": 0 },
+    { "word": "、", "count": 0 },
+    { "word": "。", "count": 0 },
+    { "word": "！", "count": 0 },
+    { "word": "？", "count": 0 }
+  ]
+}

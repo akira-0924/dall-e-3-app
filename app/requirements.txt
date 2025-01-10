@@ -5,3 +5,4 @@ numpy
 requests
 Pillow
 romkan
+pykakasi

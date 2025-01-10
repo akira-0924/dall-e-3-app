@@ -1,0 +1,74 @@
+name: Build And Deploy Actions
+
+on:
+  push:
+    branches:
+      - develop
+
+jobs:
+  build:
+    name: Build Job
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: "20"
+
+      - name: package install
+        run: |
+          cd ai-front
+          npm install
+
+      - name: Prepare .env file
+        run: |
+          cd ai-front
+          cat << EOF > .env.production
+          REACT_APP_S3_ENDPOINT=${{ secrets.REACT_APP_S3_ENDPOINT }}
+          REACT_APP_API_ENDPOINT=${{ secrets.REACT_APP_API_ENDPOINT }}
+          REACT_APP_S3_JSON_ENDPOINT=${{ secrets.REACT_APP_S3_JSON_ENDPOINT }}
+          EOF
+
+      - name: Configure AWS credentials
+        run: |
+          aws configure set aws_access_key_id ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws configure set aws_secret_access_key ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws configure set default.region ${{ secrets.AWS_REGION }}
+
+      - name: React build
+        run: |
+          cd ai-front
+          npm run build
+          aws s3 cp --recursive --region ap-northeast-1 build s3://${{ secrets.AWS_S3_BUCKET_NAME }}
+
+  deploy:
+    name: Deploy Job
+    runs-on: ubuntu-latest
+    needs: build
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: "20"
+
+      - name: docker image build
+        run: docker build --platform amd64 -t ${{secrets.DOCKER_HUB_REPO}} .
+
+      - name: Configure AWS credentials
+        run: |
+          aws configure set aws_access_key_id ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws configure set aws_secret_access_key ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws configure set default.region ${{ secrets.AWS_REGION }}
+
+      - name: docker hub push
+        run: |
+          docker login -u ${{secrets.DOCKER_USERNAME}} -p ${{secrets.DOCKER_PASSWORD}}
+          docker push ${{secrets.DOCKER_HUB_REPO}}
